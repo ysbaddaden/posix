@@ -1,0 +1,9 @@
+includes:
+  - ulimit
+
+constants:
+  - UL_GETFSIZE
+  - UL_SETFSIZE
+
+functions:
+  - ulimit

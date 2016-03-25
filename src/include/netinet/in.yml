@@ -1,0 +1,59 @@
+includes:
+  - netinet/in
+
+requires:
+  - sys/socket
+  - stdint
+
+constants:
+  - IPPROTO_IP
+  - IPPROTO_IPV6
+  - IPPROTO_ICMP
+  - IPPROTO_RAW
+  - IPPROTO_TCP
+  - IPPROTO_UDP
+
+  # FIXME: can't parse ((in_addr_t) 0x00000000)
+  - INADDR_ANY
+  - INADDR_BROADCAST
+  - INADDR_NONE
+  - INADDR_LOOPBACK
+
+  - INET_ADDRSTRLEN
+  - INET6_ADDRSTRLEN
+
+  - IPV6_JOIN_GROUP
+  - IPV6_LEAVE_GROUP
+  - IPV6_MULTICAST_HOPS
+  - IPV6_MULTICAST_IF
+  - IPV6_MULTICAST_LOOP
+  - IPV6_UNICAST_HOPS
+  - IPV6_V6ONLY
+
+  - IPV6_ADD_MEMBERSHIP  # cygwin
+  - IPV6_DROP_MEMBERSHIP # cygwin
+
+#macros:
+#  - IN6_IS_ADDR_UNSPECIFIED
+#  - IN6_IS_ADDR_LOOPBACK
+#  - IN6_IS_ADDR_MULTICAST
+#  - IN6_IS_ADDR_LINKLOCAL
+#  - IN6_IS_ADDR_SITELOCAL
+#  - IN6_IS_ADDR_V4MAPPED
+#  - IN6_IS_ADDR_V4COMPAT
+#  - IN6_IS_ADDR_MC_NODELOCAL
+#  - IN6_IS_ADDR_MC_LINKLOCAL
+#  - IN6_IS_ADDR_MC_SITELOCAL
+#  - IN6_IS_ADDR_MC_ORGLOCAL
+#  - IN6_IS_ADDR_MC_GLOBAL
+
+types:
+  - in_port_t
+  - in_addr_t
+
+structs:
+  - in_addr
+  - in6_addr
+  - sockaddr_in
+  - sockaddr_in6
+  - ipv6_mreq

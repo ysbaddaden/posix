@@ -1,0 +1,11 @@
+includes:
+  - sys/times
+
+requires:
+  - sys/types
+
+structs:
+  - tms
+
+functions:
+  - times

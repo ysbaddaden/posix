@@ -1,0 +1,17 @@
+includes:
+  - sys/statvfs
+
+requires:
+  - sys/types
+
+constants:
+  - ST_RDONLY
+  - ST_NOSUID
+
+types:
+  - statvfs
+
+functions:
+  - fstatvfs
+  - statvfs
+

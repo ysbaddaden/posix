@@ -1,0 +1,11 @@
+includes:
+  - monetary
+
+requires:
+  - locale
+  - stddef
+  - sys/types
+
+functions:
+  - strfmon
+  - strfmon_l

@@ -1,0 +1,138 @@
+includes:
+  - termios
+
+requires:
+  - sys/types
+
+constants:
+  - VEOF
+  - VEOL
+  - VERASE
+  - VINTR
+  - VKILL
+  - VMIN
+  - VQUIT
+  - VSTART
+  - VSTOP
+  - VSUSP
+
+  - BRKINT
+  - ICRNL
+  - IGNBRK
+  - IGNCR
+  - IGNPAR
+  - INLCR
+  - INPCK
+  - ISTRIP
+  - IXANY
+  - IXOFF
+  - IXON
+  - PARMRK
+
+  - OPOST
+  - ONLCR
+  - OCRNL
+  - ONOCR
+  - ONLRET
+  - OFDEL
+  - OFILL
+
+  - CRDLY
+  - CR0
+  - CR1
+  - CR2
+  - CR3
+
+  - TABDLY
+  - TAB0
+  - TAB1
+  - TAB2
+  - TAB3
+
+  - BSDLY
+  - BS0
+  - BS1
+
+  - VTDLY
+  - VT0
+  - VT1
+  - FFDLY
+  - FF0
+  - FF1
+
+  - NLDLY
+  - NL0
+  - NL1
+
+  - B0
+  - B50
+  - B75
+  - B110
+  - B134
+  - B150
+  - B200
+  - B300
+  - B600
+  - B1200
+  - B1800
+  - B2400
+  - B4800
+  - B9600
+  - B19200
+  - B38400
+
+  - CSIZE
+  - CS5
+  - CS6
+  - CS7
+  - CS8
+  - CSTOPB
+  - CREAD
+  - PARENB
+  - PARODD
+  - HUPCL
+  - CLOCAL
+
+  - ECHO
+  - ECHOE
+  - ECHOK
+  - ECHONL
+  - ICANON
+  - IEXTEN
+  - ISIG
+  - NOFLSH
+  - TOSTOP
+
+  - TCSANOW
+  - TCSADRAIN
+  - TCSAFLUSH
+
+  - TCIFLUSH
+  - TCIOFLUSH
+  - TCOFLUSH
+
+  - TCIOFF
+  - TCION
+  - TCOOFF
+  - TCOON
+
+types:
+  - cc_t
+  - speed_t
+  - tcflag_t
+
+structs:
+  - termios
+
+functions:
+  - cfgetispeed
+  - cfgetospeed
+  - cfsetispeed
+  - cfsetospeed
+  - tcdrain
+  - tcflow
+  - tcflush
+  - tcgetattr
+  - tcgetsid
+  - tcsendbreak
+  - tcsetattr

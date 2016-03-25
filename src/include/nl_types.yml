@@ -1,0 +1,15 @@
+includes:
+  - nl_types
+
+constants:
+  - NL_SETD
+  - NL_CAT_LOCALE
+
+types:
+  - nl_catd
+  - nl_item
+
+functions:
+  - catclose
+  - catgets
+  - catopen

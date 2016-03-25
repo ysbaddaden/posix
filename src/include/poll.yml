@@ -1,0 +1,23 @@
+includes:
+  - poll
+
+constants:
+  - POLLIN
+  - POLLRDNORM
+  - POLLRDBAND
+  - POLLPRI
+  - POLLOUT
+  - POLLWRNORM
+  - POLLWRBAND
+  - POLLERR
+  - POLLHUP
+  - POLLNVAL
+
+types:
+  - nfds_t
+
+structs:
+  - pollfd
+
+functions:
+  - poll

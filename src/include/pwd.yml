@@ -1,0 +1,17 @@
+includes:
+  - pwd
+
+requires:
+  - sys/types
+
+structs:
+  - passwd
+
+functions:
+  - endpwent
+  - getpwent
+  - getpwnam
+  - getpwnam_r
+  - getpwuid
+  - getpwuid_r
+  - setpwent

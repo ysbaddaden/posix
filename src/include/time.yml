@@ -1,0 +1,56 @@
+includes:
+  - time
+
+requires:
+  - sys/types
+  - locale
+  #- signal # cygwin
+
+#map:
+#  sigevent: void  # cygwin
+
+constants:
+  - CLOCKS_PER_SEC
+
+  - CLOCK_MONOTONIC
+  - CLOCK_PROCESS_CPUTIME_ID
+  - CLOCK_REALTIME
+  - CLOCK_THREAD_CPUTIME_ID
+
+  - TIMER_ABSTIME
+
+structs:
+  - tm
+  - timespec
+  - itimerspec
+
+functions:
+  - clock
+  - clock_getcpuclockid
+  - clock_getres
+  - clock_gettime
+  - clock_nanosleep
+  - clock_settime
+  - difftime
+  - getdate
+  - gmtime
+  - gmtime_r
+  - localtime
+  - localtime_r
+  - mktime
+  - nanosleep
+  - strftime
+  - strftime_l
+  - strptime
+  - time
+  - timer_create
+  - timer_delete
+  - timer_getoverrun
+  - timer_gettime
+  - timer_settime
+  - tzset
+
+variables:
+  - daylight
+  - timezone
+  - tzname

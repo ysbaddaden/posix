@@ -1,0 +1,33 @@
+includes:
+  - fenv
+
+constants:
+  - FE_DIVBYZERO
+  - FE_INEXACT
+  - FE_INVALID
+  - FE_OVERFLOW
+  - FE_UNDERFLOW
+
+  - FE_DOWNWARD
+  - FE_TONEAREST
+  - FE_TOWARDZERO
+  - FE_UPWARD
+
+  - FE_DFL_ENV
+
+types:
+  - fenv_t
+  - fexcept_t
+
+functions:
+  - feclearexcept
+  - fegetenv
+  - fegetexceptflag
+  - fegetround
+  - feholdexcept
+  - feraiseexcept
+  - fesetenv
+  - fesetexceptflag
+  - fesetround
+  - fetestexcept
+  - feupdateenv

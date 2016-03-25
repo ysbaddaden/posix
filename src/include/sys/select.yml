@@ -1,0 +1,27 @@
+includes:
+  - sys/select
+
+requires:
+  - sys/types
+  - sys/time
+  - time
+  - signal
+
+#macros:
+#  - FD_CLR
+#  - FD_ISSET
+#  - FD_SET
+#  - FD_ZERO
+
+constants:
+  - FD_SETSIZE
+
+types:
+  - fd_mask # freebsd
+
+structs:
+  - fd_set
+
+functions:
+  - pselect
+  - select

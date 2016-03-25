@@ -1,0 +1,14 @@
+includes:
+  - net/if
+
+constants:
+  - IF_NAMESIZE
+
+structs:
+  - if_nameindex
+
+functions:
+  - if_freenameindex
+  - if_indextoname
+  - if_nameindex
+  - if_nametoindex

@@ -1,0 +1,26 @@
+includes:
+  - sys/sem
+
+requires:
+  - sys/types
+  - sys/ipc
+  - time # cygwin
+
+structs:
+  - semid_ds
+  - sembuf
+
+constants:
+  - SEM_UNDO
+  - GETNCNT
+  - GETPID
+  - GETVAL
+  - GETALL
+  - GETZCNT
+  - SETVAL
+  - SETALL
+
+functions:
+  - semctl
+  - semget
+  - semop

@@ -1,0 +1,25 @@
+includes:
+  - sched
+
+requires:
+  - sys/types
+  - time
+
+constants:
+  - SCHED_FIFO
+  - SCHED_RR
+  - SCHED_OTHER
+  - SCHED_SPORADIC
+
+structs:
+  - sched_param
+
+functions:
+  - sched_get_priority_max
+  - sched_get_priority_min
+  - sched_getparam
+  - sched_getscheduler
+  - sched_rr_get_interval
+  - sched_setparam
+  - sched_setscheduler
+  - sched_yield

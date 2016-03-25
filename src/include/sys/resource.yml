@@ -1,0 +1,42 @@
+includes:
+  - sys/resource
+
+requires:
+  - sys/types
+  - sys/time
+
+constants:
+  - PRIO_PROCESS
+  - PRIO_PGRP
+  - PRIO_USER
+
+  - RLIM_INFINITY
+  - RLIM_SAVED_MAX
+  - RLIM_SAVED_CUR
+
+  - RUSAGE_SELF
+  - RUSAGE_CHILDREN
+
+  - RLIMIT_CORE
+  - RLIMIT_CPU
+  - RLIMIT_DATA
+  - RLIMIT_FSIZE
+  - RLIMIT_NOFILE
+  - RLIMIT_STACK
+  - RLIMIT_AS
+
+  - RLIMIT_VMEM # freebsd
+
+types:
+  - rlim_t
+
+structs:
+  - rlimit
+  - rusage
+
+functions:
+  - getpriority
+  - getrlimit
+  - getrusage
+  - setpriority
+  - setrlimit

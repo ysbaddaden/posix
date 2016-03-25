@@ -1,0 +1,97 @@
+includes:
+  - sys/socket
+
+requires:
+  - sys/types
+  - sys/uio
+
+#macros:
+#  - CMSG_DATA(cmsg)
+#  - CMSG_NXTHDR(mhdr,cmsg)
+#  - CMSG_FIRSTHDR(mhdr)
+
+constants:
+  - SCM_RIGHTS
+
+  - SOCK_DGRAM
+  - SOCK_RAW
+  - SOCK_SEQPACKET
+  - SOCK_STREAM
+
+  - SOL_SOCKET
+
+  - SO_ACCEPTCONN
+  - SO_BROADCAST
+  - SO_DEBUG
+  - SO_DONTROUTE
+  - SO_ERROR
+  - SO_KEEPALIVE
+  - SO_LINGER
+  - SO_OOBINLINE
+  - SO_RCVBUF
+  - SO_RCVLOWAT
+  - SO_RCVTIMEO
+  - SO_REUSEADDR
+  - SO_SNDBUF
+  - SO_SNDLOWAT
+  - SO_SNDTIMEO
+  - SO_TYPE
+
+  - SOMAXCONN
+
+  - MSG_CTRUNC
+  - MSG_DONTROUTE
+  - MSG_EOR
+  - MSG_OOB
+  - MSG_NOSIGNAL
+  - MSG_PEEK
+  - MSG_TRUNC
+  - MSG_WAITALL
+
+  # not POSIX
+  - PF_INET
+  - PF_INET6
+  - PF_UNIX
+  - PF_UNSPEC
+  - PF_LOCAL # glibc
+
+  - AF_INET
+  - AF_INET6
+  - AF_UNIX
+  - AF_UNSPEC
+  - AF_LOCAL # cygwin
+
+  - SHUT_RD
+  - SHUT_RDWR
+  - SHUT_WR
+
+
+types:
+  - socklen_t
+  - sa_family_t
+
+structs:
+  - sockaddr
+  - sockaddr_storage
+  - msghdr
+  - cmsghdr
+
+functions:
+  - accept
+  - bind
+  - connect
+  - getpeername
+  - getsockname
+  - getsockopt
+  - listen
+  - recv
+  - recvfrom
+  - recvmsg
+  - send
+  - sendmsg
+  - sendto
+  - setsockopt
+  - shutdown
+  - sockatmark
+  - socket
+  - socketpair

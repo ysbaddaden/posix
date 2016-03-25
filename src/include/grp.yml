@@ -1,0 +1,17 @@
+includes:
+  - grp
+
+requires:
+  - sys/types
+
+structs:
+  - group
+
+functions:
+  - endgrent
+  - getgrent
+  - getgrgid
+  - getgrgid_r
+  - getgrnam
+  - getgrnam_r
+  - setgrent

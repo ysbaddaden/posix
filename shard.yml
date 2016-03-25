@@ -1,0 +1,14 @@
+name: posix
+version: 0.1.0
+
+authors:
+  - Julien Portalier <julien@portalier.com>
+
+description: |
+  POSIX libc bindings
+
+development_dependencies:
+  crystal_lib:
+    github: manastech/crystal_lib
+
+license: Apache-2.0

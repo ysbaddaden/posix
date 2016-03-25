@@ -1,0 +1,5 @@
+includes:
+  - netinet/tcp
+
+constants:
+  - TCP_NODELAY

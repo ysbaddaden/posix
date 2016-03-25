@@ -1,0 +1,11 @@
+includes:
+  - fnmatch
+
+constants:
+  - FNM_NOMATCH
+  - FNM_PATHNAME
+  - FNM_PERIOD
+  - FNM_NOESCAPE
+
+functions:
+  - fnmatch

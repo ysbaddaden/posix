@@ -1,0 +1,47 @@
+includes:
+  - regex
+
+requires:
+  - sys/types
+
+types:
+  - regoff_t
+  - reg_syntax_t # gnu
+
+structs:
+  - regex_t
+  - regmatch_t
+
+aliases:
+  re_pattern_buffer: regex_t
+
+constants:
+  - REG_EXTENDED
+  - REG_ICASE
+  - REG_NOSUB
+  - REG_NEWLINE
+
+  - REG_NOTBOL
+  - REG_NOTEOL
+
+  # FIXME: glibc: enum reg_errcode_t
+  - REG_NOMATCH
+  - REG_BADPAT
+  - REG_ECOLLATE
+  - REG_ECTYPE
+  - REG_EESCAPE
+  - REG_ESUBREG
+  - REG_EBRACK
+  - REG_EPAREN
+  - REG_EBRACE
+  - REG_BADBR
+  - REG_ERANGE
+  - REG_ESPACE
+  - REG_BADRPT
+
+functions:
+  - regcomp
+  - regerror
+  - regexec
+  - regfree
+

@@ -1,0 +1,16 @@
+includes:
+  - setjmp
+
+types:
+  - jmp_buf
+  - sigjmp_buf
+
+functions:
+  - siglongjmp
+  - sigsetjmp
+
+  # obsolete
+  - _longjmp
+  - longjmp
+  - _setjmp
+  - setjmp

@@ -1,0 +1,101 @@
+includes:
+  - stdio
+
+requires:
+  - sys/types
+  - stddef
+  #- stdarg
+
+constants:
+  - BUFSIZ
+  - L_ctermid
+
+  - _IOFBF
+  - _IOLBF
+  - _IONBF
+
+  - SEEK_CUR
+  - SEEK_END
+  - SEEK_SET
+
+  - FILENAME_MAX
+  - FOPEN_MAX
+  - EOF
+
+types:
+  - FILE
+  - fpos_t
+
+functions:
+  - clearerr
+  - ctermid
+  - dprintf
+  - fclose
+  - fdopen
+  - feof
+  - ferror
+  - fflush
+  - fgetc
+  - fgetpos
+  - fgets
+  - fileno
+  - flockfile
+  - fmemopen
+  - fopen
+  - fprintf
+  - fputc
+  - fputs
+  - fread
+  - freopen
+  - fscanf
+  - fseek
+  - fseeko
+  - fsetpos
+  - ftell
+  - ftello
+  - ftrylockfile
+  - funlockfile
+  - fwrite
+  - getc
+  - getc_unlocked
+  - getchar
+  - getchar_unlocked
+  - getdelim
+  - getline
+  - open_memstream
+  - pclose
+  - perror
+  - popen
+  - printf
+  - putc
+  - putc_unlocked
+  - putchar
+  - putchar_unlocked
+  - puts
+  - remove
+  - rename
+  - renameat
+  - rewind
+  - scanf
+  - setbuf
+  - setvbuf
+  - snprintf
+  - sprintf
+  - sscanf
+  - tmpfile
+  - ungetc
+
+  # FIXME: undefined constant VaList
+  #- vdprintf
+  #- vfprintf
+  #- vfscanf
+  #- vprintf
+  #- vscanf
+  #- vsnprintf
+  #- vsprintf
+  #- vsscanf
+
+#variables:
+#  - stderr
+#  - stdin
+#  - stdout

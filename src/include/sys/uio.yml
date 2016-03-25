@@ -1,0 +1,12 @@
+includes:
+  - sys/uio
+
+requires:
+  - sys/types
+
+structs:
+  - iovec
+
+functions:
+  - readv
+  - writev

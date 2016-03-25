@@ -1,0 +1,36 @@
+includes:
+  - sys/wait
+
+requires:
+  - sys/types
+  - signal
+
+map:
+  __wait_status_ptr_t: Int* # cygwin
+  __WAIT_STATUS: Int*       # gnu
+
+#macros:
+#  - WEXITSTATUS
+#  - WIFCONTINUED
+#  - WIFEXITED
+#  - WIFSIGNALED
+#  - WIFSTOPPED
+#  - WSTOPSIG
+#  - WTERMSIG
+
+constants:
+  - WCONTINUED
+  - WNOHANG
+  - WUNTRACED
+
+  - WEXITED
+  - WNOWAIT
+  - WSTOPPED
+
+types:
+  - idtype_t
+
+functions:
+  - wait
+  - waitid
+  - waitpid

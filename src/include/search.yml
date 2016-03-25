@@ -1,0 +1,32 @@
+includes:
+  - search
+
+requires:
+  - sys/types
+
+map:
+  __compar_fn_t: "Void* -> Int" # gnu
+  __action_fn_t: "Int -> Void"  # gnu
+
+enums:
+  - ACTION
+  - VISIT
+
+structs:
+  - ENTRY
+
+aliases:
+  entry: ENTRY # musl
+
+functions:
+  - hcreate
+  - hdestroy
+  - hsearch
+  - insque
+  - lfind
+  - lsearch
+  - remque
+  - tdelete
+  - tfind
+  - tsearch
+  - twalk

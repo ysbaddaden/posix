@@ -1,0 +1,12 @@
+includes:
+  - sys/time
+
+requires:
+  - sys/types
+  #- sys/select
+
+structs:
+  - timeval
+
+functions:
+  - utimes

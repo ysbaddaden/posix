@@ -1,0 +1,65 @@
+includes:
+  - netdb
+
+requires:
+  - netinet/in
+  - sys/socket
+  - stdint
+
+constants:
+  - AI_PASSIVE
+  - AI_CANONNAME
+  - AI_NUMERICHOST
+  - AI_NUMERICSERV
+  - AI_V4MAPPED
+  - AI_ALL
+  - AI_ADDRCONFIG
+
+  - NI_NOFQDN
+  - NI_NUMERICHOST
+  - NI_NAMEREQD
+  - NI_NUMERICSERV
+  - NI_DGRAM
+  - NI_NUMERICSCOPE
+
+  - EAI_AGAIN
+  - EAI_BADFLAGS
+  - EAI_FAIL
+  - EAI_FAMILY
+  - EAI_MEMORY
+  - EAI_NONAME
+  - EAI_SERVICE
+  - EAI_SOCKTYPE
+  - EAI_SYSTEM
+  - EAI_OVERFLOW
+
+structs:
+  - hostent
+  - netent
+  - protoent
+  - servent
+  - addrinfo
+
+functions:
+  - endhostent
+  - endnetent
+  - endprotoent
+  - endservent
+  - freeaddrinfo
+  - gai_strerror
+  - getaddrinfo
+  - gethostent
+  - getnameinfo
+  - getnetbyaddr
+  - getnetbyname
+  - getnetent
+  - getprotobyname
+  - getprotobynumber
+  - getprotoent
+  - getservbyname
+  - getservbyport
+  - getservent
+  - sethostent
+  - setnetent
+  - setprotoent
+  - setservent

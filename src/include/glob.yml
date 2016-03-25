@@ -1,0 +1,26 @@
+includes:
+  - glob
+
+requires:
+  - sys/types
+  - sys/stat # cygwin
+
+constants:
+  - GLOB_APPEND
+  - GLOB_DOOFFS
+  - GLOB_ERR
+  - GLOB_MARK
+  - GLOB_NOCHECK
+  - GLOB_NOESCAPE
+  - GLOB_NOSORT
+
+  - GLOB_ABORTED
+  - GLOB_NOMATCH
+  - GLOB_NOSPACE
+
+structs:
+  - glob_t
+
+functions:
+  - glob
+  - globfree

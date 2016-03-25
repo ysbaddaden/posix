@@ -1,0 +1,13 @@
+includes:
+  - strings
+
+requires:
+  - stddef
+  - locale
+
+functions:
+  - ffs
+  - strcasecmp
+  - strcasecmp_l
+  - strncasecmp
+  - strncasecmp_l

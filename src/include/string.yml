@@ -1,0 +1,42 @@
+includes:
+  - string
+
+requires:
+  - stddef
+  - locale
+
+functions:
+  - memccpy
+  - memchr
+  - memcmp
+  - memcpy
+  - memmove
+  - memset
+  - stpcpy
+  - stpncpy
+  - strcat
+  - strchr
+  - strcmp
+  - strcoll
+  - strcoll_l
+  - strcpy
+  - strcspn
+  - strdup
+  - strerror
+  - strerror_l
+  - strerror_r
+  - strlen
+  - strncat
+  - strncmp
+  - strncpy
+  - strndup
+  - strnlen
+  - strpbrk
+  - strrchr
+  - strsignal
+  - strspn
+  - strstr
+  - strtok
+  - strtok_r
+  - strxfrm
+  - strxfrm_l

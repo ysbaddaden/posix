@@ -1,0 +1,22 @@
+includes:
+  - sys/ipc
+
+requires:
+  - sys/types
+
+constants:
+  - IPC_CREAT
+  - IPC_EXCL
+  - IPC_NOWAIT
+
+  - IPC_PRIVATE
+
+  - IPC_RMID
+  - IPC_SET
+  - IPC_STAT
+
+structs:
+  - ipc_perm
+
+functions:
+  - ftok

@@ -1,0 +1,27 @@
+includes:
+  - utmpx
+
+requires:
+  - sys/types
+  - sys/time
+
+structs:
+  - utmpx
+
+constants:
+  - EMPTY
+  - BOOT_TIME
+  - OLD_TIME
+  - NEW_TIME
+  - USER_PROCESS
+  - INIT_PROCESS
+  - LOGIN_PROCESS
+  - DEAD_PROCESS
+
+functions:
+  - endutxent
+  - getutxent
+  - getutxid
+  - getutxline
+  - pututxline
+  - setutxent

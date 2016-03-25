@@ -1,0 +1,29 @@
+includes:
+  - sys/shm
+
+requires:
+  - sys/types
+  - sys/ipc
+  - time # cygwin
+
+map:
+  timestruc_t: timespec # cygwin
+
+constants:
+  - SHM_RDONLY
+  - SHM_RND
+
+  # FIXME: usually refers to internals
+  #- SHMLBA
+
+types:
+  - shmatt_t
+
+structs:
+  - shmid_ds
+
+functions:
+  - shmat
+  - shmctl
+  - shmdt
+  - shmget
