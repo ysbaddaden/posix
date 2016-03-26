@@ -23,7 +23,7 @@ constants:
   - EOF
 
 types:
-  - FILE
+  - FILE = Void
   - fpos_t
 
 functions:

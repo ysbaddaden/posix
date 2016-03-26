@@ -1,6 +1,12 @@
 includes:
   - math
 
+libraries:
+  freebsd:
+    - m
+  gnu:
+    - m
+
 requires:
   - stdint
 

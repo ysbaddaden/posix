@@ -1,6 +1,12 @@
 includes:
   - dlfcn
 
+libraries:
+  darwin:
+    - dl
+  gnu:
+    - dl
+
 constants:
   - RTLD_LAZY
   - RTLD_NOW

@@ -1,6 +1,12 @@
 includes:
   - fenv
 
+libraries:
+  freebsd:
+    - m
+  gnu:
+    - m
+
 constants:
   - FE_DIVBYZERO
   - FE_INEXACT

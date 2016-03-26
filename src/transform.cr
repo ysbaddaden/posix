@@ -37,7 +37,7 @@ module POSIX
     private getter requirements
     private getter processed
 
-    def initialize(name, @bits = nil)
+    def initialize(name, @bits = nil, @abi = nil)
       @name = name.to_s
 
       @resolver = Resolver.new
@@ -63,6 +63,11 @@ module POSIX
           end
         end
         io << "\n"
+
+        if libs = libraries
+          io << "@[Link(" << libs.map(&.inspect).join(", ") << ")]\n"
+        end
+
         io << "lib LibC\n"
 
         constants { |name| transform(io, name, :constant) }
@@ -71,7 +76,14 @@ module POSIX
         enums { |name| transform(io, name, :enum) }
         io << "\n"
 
-        types { |name| transform(io, name, :type) }
+        types do |name|
+          if name.index('=')
+            name, type = name.split('=', 2).map(&.strip)
+            io << "  type " << name << " = " << type << "\n"
+          else
+            transform(io, name, :type)
+          end
+        end
         io << "\n"
 
         unions { |name| transform(io, name, :union) }
@@ -91,7 +103,7 @@ module POSIX
             name = flags.pop
           end
           if name.index(':')
-            name, return_type = name.split(" : ", 2)
+            name, return_type = name.split(':', 2).map(&.strip)
           end
           if node = find_node(name, :function)
             processed << name as String
@@ -545,6 +557,21 @@ module POSIX
 
     def source
       @source ||= YAML.parse(File.read(source_path)).raw as Hash
+    end
+
+    def libraries
+      if libs = source["libraries"]?
+        case libs
+        when Array
+          libs
+        when Hash
+          if abi = @abi
+            if _libs = (libs as Hash)[abi]?
+              _libs as Array
+            end
+          end
+        end
+      end
     end
 
     def source_path

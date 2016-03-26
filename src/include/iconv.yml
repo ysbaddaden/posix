@@ -1,6 +1,10 @@
 includes:
   - iconv
 
+libraries:
+  darwin:
+    - iconv
+
 requires:
   - stddef
 

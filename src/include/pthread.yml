@@ -1,6 +1,10 @@
 includes:
   - pthread
 
+libraries:
+  freebsd:
+    - pthread
+
 requires:
   - sys/types
   - sched
