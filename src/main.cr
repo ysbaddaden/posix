@@ -3,26 +3,24 @@ require "option_parser"
 
 module H2CR
   struct Options
-    property os : String?
-    property libc : String?
-    property arch : String?
-    property bits : Int32?
+    property arch : String
+    property sys : String
+    property abi : String
     property debug : Bool
 
-    def initialize
+    def initialize(@arch = "unknown", @sys = "unknown", @abi = "unknown")
       @debug = false
     end
 
-    def path
-      String.build do |str|
-        str << "lib_c"
-        {% for part in %w(os libc arch) %}
-          if %value = {{ part.id }}
-            str << File::SEPARATOR
-            str << %value
-          end
-        {% end %}
-      end
+    def bits=(@bits : Int32)
+    end
+
+    def bits
+      @bits || arch.includes?("64") ? 64 : 32
+    end
+
+    def target
+      @target ||= {arch, sys, abi}.join('-')
     end
   end
 
@@ -32,19 +30,19 @@ module H2CR
     parser = OptionParser.new
     parser.banner = "Usage: h2cr [options] files"
 
-    parser.on("--os=N", "Specify the operating system (android, darwin, freebsd, linux, windows)") do |os|
-      options.os = os
-    end
-
-    parser.on("--libc=NAME", "Specify the libc (eg: cygwin, gnu, musl)") do |libc|
-      options.libc = libc
-    end
-
-    parser.on("--arch=NAME", "Specify the arch (arm, arm64, mips, mips64, x86, x86_x64)") do |arch|
+    parser.on("--arch=NAME", "Specify the ARCH (arm, arm64, mips, mips64, x86, x86_x64)") do |arch|
       options.arch = arch
     end
 
-    parser.on("--bits=N", "Specify the long bit size (32, 64)") do |n|
+    parser.on("--sys=N", "Specify the OS (darwin, freebsd, linux, win32)") do |sys|
+      options.sys = sys
+    end
+
+    parser.on("--abi=NAME", "Specify the ABI (eg: cygwin, darwin, android, gnu, musl)") do |abi|
+      options.abi = abi
+    end
+
+    parser.on("--bits=N", "Force the LONG bit size (32, 64)") do |n|
       options.bits = n.to_i
     end
 
@@ -64,17 +62,9 @@ module H2CR
       .map { |name| name.sub(File.join(__DIR__, "include", ""), "").sub(".yml", "") }
       .sort
 
-    unless options.debug
-      if options.os.nil? || options.arch.nil?
-        puts "Error: missing required --os and --arch arguments"
-        puts parser
-        exit
-      end
-    end
-
     names.each do |name|
-      path = File.join(options.path, "#{name}.cr")
-      transformer = POSIX::Transformer.new(name, bits: options.bits)
+      path = File.join("src", "c", options.target, "#{name}.cr")
+      transformer = POSIX::Transformer.new(name, bits: options.bits, abi: options.abi)
 
       if options.debug
         puts "# #{path}"

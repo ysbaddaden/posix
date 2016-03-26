@@ -1,33 +1,45 @@
-# SOURCES = $(wildcard src/*.cr) $(wildcard src/**/*.cr)
-
 MAIN = bin/main
 CRYSTAL = crystal
+TMP = /tmp/crystal-posix-test
+TEST = rm -f $(TMP); $(CRYSTAL) build --prelude=empty -o $(TMP) src/base.cr
 
-all: android freebsd linux windows format
+all: android freebsd linux macosx windows format
 
 bin/main: src/*.cr
 	@mkdir -p bin
 	$(CRYSTAL) build --release -o bin/main src/main.cr
 
 android: bin/main
-	CPATH=include/android/arm $(MAIN) --os=android --arch=arm --bits=32
-	CPATH=include/android/arm64 $(MAIN) --os=android --arch=arm64 --bits=64
-	CPATH=include/android/mips $(MAIN) --os=android --arch=mips --bits=32
-	CPATH=include/android/mips64 $(MAIN) --os=android --arch=mips64 --bits=64
-	CPATH=include/android/x86 $(MAIN) --os=android --arch=x86 --bits=32
-	CPATH=include/android/x86_64 $(MAIN) --os=android --arch=x86_64 --bits=64
+	CPATH=include/android/arm $(MAIN) --arch=arm --sys=linux --abi=android
+	CPATH=include/android/arm64 $(MAIN) --arch=arm64 --sys=linux --abi=android
+	CPATH=include/android/mips $(MAIN) --arch=mips --sys=linux --abi=android
+	CPATH=include/android/mips64 $(MAIN) --arch=mips64 --sys=linux --abi=android
+	CPATH=include/android/x86 $(MAIN) --arch=x86 --sys=linux --abi=android
+	CPATH=include/android/x86_64 $(MAIN) --arch=x86_64 --sys=linux --abi=android
 
 freebsd: bin/main
-	CPATH=include/freebsd $(MAIN) --os=freebsd --arch=x86_64 --bits=64
+	#CPATH=include/freebsd32 $(MAIN) --arch=x86 --sys=freebsd
+	CPATH=include/freebsd64 $(MAIN) --arch=x86_64 --sys=freebsd
 
 linux: bin/main
-	CPATH=include/linux/x86/gnu $(MAIN) --os=linux --libc=gnu --arch=i686 --bits=32
-	#CPATH=include/linux/x86_64/gnu $(MAIN) --os=linux --libc=gnu --arch=x86_64 --bits=64
-	CPATH=include/linux/x86/musl $(MAIN) --os=linux --libc=musl --arch=i686 --bits=32
-	#CPATH=include/linux/x86_64/musl $(MAIN) --os=linux --libc=musl --arch=x86_64 --bits=64
+	CPATH=include/linux/gnu32 $(MAIN) --arch=x86 --sys=linux --abi=gnu
+	#CPATH=include/linux/gnu64 $(MAIN) --arch=x86_64 --sys=linux --abi=gnu
+	CPATH=include/linux/musl32 $(MAIN) --arch=x86 --sys=linux --abi=musl --arch=x86
+	#CPATH=include/linux/musl64 $(MAIN) --arch=x86_64 --sys=linux --abi=musl
+
+macosx: bin/main
+	CPATH=include/darwin $(MAIN) --arch=x86_64 --sys=macosx --abi=darwin
 
 windows: bin/main
-	CPATH=include/cygwin $(MAIN) --os=windows --libc=cygwin --arch=x86 --bits=32
+	CPATH=include/cygwin $(MAIN) --arch=x86 --sys=win32 --abi=cygwin
 
 format:
-	$(CRYSTAL) tool format lib_c
+	$(CRYSTAL) tool format src/c
+
+test:
+	for target in src/c/*; do\
+	  echo $$target;\
+	  for file in `find $$target -iname "*.cr"`; do\
+		$(TEST) $$file;\
+	  done;\
+	done
