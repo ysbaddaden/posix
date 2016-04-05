@@ -50,6 +50,9 @@ functions:
   - timer_settime
   - tzset
 
+  # not posix
+  - timegm
+
 variables:
   - daylight
   - timezone

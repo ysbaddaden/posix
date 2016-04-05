@@ -5,8 +5,17 @@ requires:
   - sys/types
   #- sys/select
 
+map:
+  __timezone_ptr_t: void* # gnu
+
 structs:
   - timeval
 
+  # not posix
+  - timezone
+
 functions:
   - utimes
+
+  # not posix
+  - gettimeofday

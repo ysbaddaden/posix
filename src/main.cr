@@ -63,7 +63,7 @@ module H2CR
       .sort
 
     names.each do |name|
-      path = File.join("src", "c", options.target, "#{name}.cr")
+      path = File.join("targets", options.target, "c", "#{name}.cr")
       transformer = POSIX::Transformer.new(name, bits: options.bits, abi: options.abi)
 
       if options.debug

@@ -13,7 +13,6 @@ constants:
   - IPPROTO_TCP
   - IPPROTO_UDP
 
-  # FIXME: can't parse ((in_addr_t) 0x00000000)
   - INADDR_ANY
   - INADDR_BROADCAST
   - INADDR_NONE

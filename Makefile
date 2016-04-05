@@ -1,13 +1,24 @@
 MAIN = bin/main
-CRYSTAL = crystal
+CRYSTAL_BIN ?= crystal
 TMP = /tmp/crystal-posix-test
-TEST = rm -f $(TMP); $(CRYSTAL) build --prelude=empty -o $(TMP) src/base.cr
+TEST = rm -f $(TMP); $(CRYSTAL_BIN) build --prelude=empty -o $(TMP) src/base.cr
 
-all: android freebsd linux macosx windows format
+TARGET := $(subst -, ,$(shell \
+	llvm-config-3.6 --host-target 2>/dev/null || \
+	llvm-config-3.5 --host-target 2>/dev/null || \
+	llvm-config35 --host-target 2>/dev/null || \
+	llvm-config36 --host-target 2>/dev/null || \
+	llvm-config --host-target 2>/dev/null ))
+ARCH ?= $(word 1,$(TARGET))
+SYS ?= $(word 3,$(TARGET))
+ABI ?= $(word 4,$(TARGET))
+
+all: bin/main
+	$(MAIN) --arch=$(ARCH) --sys=$(SYS) --abi=$(ABI)
 
 bin/main: src/*.cr
 	@mkdir -p bin
-	$(CRYSTAL) build --release -o bin/main src/main.cr
+	$(CRYSTAL_BIN) build --release -o bin/main src/main.cr
 
 android: bin/main
 	CPATH=include/android/arm $(MAIN) --arch=arm --sys=linux --abi=android
@@ -23,18 +34,15 @@ freebsd: bin/main
 
 linux: bin/main
 	CPATH=include/linux/gnu32 $(MAIN) --arch=x86 --sys=linux --abi=gnu
-	#CPATH=include/linux/gnu64 $(MAIN) --arch=x86_64 --sys=linux --abi=gnu
+	CPATH=include/linux/gnu64 $(MAIN) --arch=x86_64 --sys=linux --abi=gnu
 	CPATH=include/linux/musl32 $(MAIN) --arch=x86 --sys=linux --abi=musl --arch=x86
-	#CPATH=include/linux/musl64 $(MAIN) --arch=x86_64 --sys=linux --abi=musl
+	CPATH=include/linux/musl64 $(MAIN) --arch=x86_64 --sys=linux --abi=musl
 
 macosx: bin/main
 	CPATH=include/darwin $(MAIN) --arch=x86_64 --sys=macosx --abi=darwin
 
 windows: bin/main
 	CPATH=include/cygwin $(MAIN) --arch=x86 --sys=win32 --abi=cygwin
-
-format:
-	$(CRYSTAL) tool format src/c
 
 test:
 	for target in src/c/*; do\

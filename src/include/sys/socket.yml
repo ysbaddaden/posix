@@ -5,6 +5,10 @@ requires:
   - sys/types
   - sys/uio
 
+map:
+  __SOCKADDR_ARG: sockaddr* # gnu
+  __CONST_SOCKADDR_ARG: sockaddr* # gnu
+
 #macros:
 #  - CMSG_DATA(cmsg)
 #  - CMSG_NXTHDR(mhdr,cmsg)
@@ -65,6 +69,8 @@ constants:
   - SHUT_RDWR
   - SHUT_WR
 
+  # not posix
+  - SOCK_CLOEXEC
 
 types:
   - socklen_t
@@ -75,6 +81,7 @@ structs:
   - sockaddr_storage
   - msghdr
   - cmsghdr
+  - linger
 
 functions:
   - accept

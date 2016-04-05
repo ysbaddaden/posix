@@ -13,8 +13,15 @@ constants:
   - RTLD_GLOBAL
   - RTLD_LOCAL
 
+structs:
+  # not posix
+  - Dl_info
+
 functions:
   - dlclose
   - dlerror
   - dlopen
   - dlsym
+
+  # not posix
+  - dladdr

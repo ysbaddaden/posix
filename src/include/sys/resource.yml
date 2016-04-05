@@ -5,6 +5,11 @@ requires:
   - sys/types
   - sys/time
 
+map:
+  __priority_which_t: int # gnu
+  __rlimit_resource_t: int # gnu
+  __rusage_who_t: int # gnu
+
 constants:
   - PRIO_PROCESS
   - PRIO_PGRP

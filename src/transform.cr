@@ -1,6 +1,7 @@
 require "yaml"
 require "crystal_lib"
 require "crystal_lib/clang"
+require "compiler/crystal/formatter"
 require "./resolver"
 
 STDERR.sync = true
@@ -51,91 +52,94 @@ module POSIX
     end
 
     def transform
-      String.build do |io|
-        requires do |name|
-          _name = name as String
-          if File.dirname(_name) == File.dirname(@name)
-            io << "require \"./#{File.basename(_name)}\"\n"
-          elsif File.dirname(@name) != "."
-            io << "require \"../#{_name}\"\n"
-          else
-            io << "require \"./#{_name}\"\n"
-          end
+      code = String.build { |str| transform(str) }
+      Crystal::Formatter.format(code)
+    end
+
+    def transform(io : IO)
+      requires do |name|
+        _name = name as String
+        if File.dirname(_name) == File.dirname(@name)
+          io << "require \"./#{File.basename(_name)}\"\n"
+        elsif File.dirname(@name) != "."
+          io << "require \"../#{_name}\"\n"
+        else
+          io << "require \"./#{_name}\"\n"
         end
-        io << "\n"
-
-        if libs = libraries
-          io << "@[Link(" << libs.map(&.inspect).join(", ") << ")]\n"
-        end
-
-        io << "lib LibC\n"
-
-        constants { |name| transform(io, name, :constant) }
-        io << "\n"
-
-        enums { |name| transform(io, name, :enum) }
-        io << "\n"
-
-        types do |name|
-          if name.index('=')
-            name, type = name.split('=', 2).map(&.strip)
-            io << "  type " << name << " = " << type << "\n"
-          else
-            transform(io, name, :type)
-          end
-        end
-        io << "\n"
-
-        unions { |name| transform(io, name, :union) }
-        io << "\n"
-
-        structs { |name| transform(io, name, :struct) }
-        io << "\n"
-
-        aliases do |name, value|
-          io << "  alias #{crname(name)} = #{crname(value)}"
-        end
-        io << "\n"
-
-        functions do |name|
-          if name.index('\n')
-            flags = name.strip.split('\n')
-            name = flags.pop
-          end
-          if name.index(':')
-            name, return_type = name.split(':', 2).map(&.strip)
-          end
-          if node = find_node(name, :function)
-            processed << name as String
-            if node.is_a?(CrystalLib::Function)
-              transform(io, node as CrystalLib::Function, return_type: return_type, flags: flags)
-              next
-            end
-          end
-          STDERR.puts "WARN: can't find #{name}"
-        end
-        io << "\n"
-
-        variables { |name| transform(io, name, :variable) }
-        io << "\n"
-
-        until requirements.empty?
-          requirements.uniq!
-
-          name = requirements.shift
-          next if processed.includes?(name)
-          processed << name
-          next unless name.starts_with?('_')
-
-          if node = resolver.unions[name]?
-            transform(io, node.dup(name))
-          elsif node = resolver.structs[name]?
-            transform(io, node, name)
-          end
-        end
-
-        io << "end\n"
       end
+      io << "\n"
+
+      if libs = libraries
+        io << "@[Link(" << libs.map(&.inspect).join(", ") << ")]\n"
+      end
+
+      io << "lib LibC\n"
+
+      constants { |name| transform(io, name, :constant) }
+      io << "\n"
+
+      enums { |name| transform(io, name, :enum) }
+      io << "\n"
+
+      types do |name|
+        if name.index('=')
+          name, type = name.split('=', 2).map(&.strip)
+          io << "  type " << name << " = " << type << "\n"
+        else
+          transform(io, name, :type)
+        end
+      end
+      io << "\n"
+
+      unions { |name| transform(io, name, :union) }
+      io << "\n"
+
+      structs { |name| transform(io, name, :struct) }
+      io << "\n"
+
+      aliases do |name, value|
+        io << "  alias #{crname(name)} = #{crname(value)}"
+      end
+      io << "\n"
+
+      functions do |name|
+        if name.index('\n')
+          flags = name.strip.split('\n')
+          name = flags.pop
+        end
+        if name.index(':')
+          name, return_type = name.split(':', 2).map(&.strip)
+        end
+        if node = find_node(name, :function)
+          processed << name as String
+          if node.is_a?(CrystalLib::Function)
+            transform(io, node as CrystalLib::Function, return_type: return_type, flags: flags)
+            next
+          end
+        end
+        STDERR.puts "WARN: can't find #{name}"
+      end
+      io << "\n"
+
+      variables { |name| transform(io, name, :variable) }
+      io << "\n"
+
+      until requirements.empty?
+        requirements.uniq!
+
+        name = requirements.shift
+        next if processed.includes?(name)
+        processed << name
+        next unless name.starts_with?('_')
+
+        if node = resolver.unions[name]?
+            transform(io, node.dup(name))
+        elsif node = resolver.structs[name]?
+          transform(io, node, name)
+        end
+      end
+
+      io << "end\n"
     end
 
     def transform(io, name, type : Symbol)
@@ -216,10 +220,7 @@ module POSIX
       begin
         ast = Crystal::Parser.parse(_value)
         if ast.is_a?(Crystal::Call)
-          unless ast.name == "new"
-            STDERR.puts "WARN: can't parse #{node.name}: #{value}"
-            return
-          end
+          raise "" unless %w(new | >> <<).includes?(ast.name)
         end
       rescue
         STDERR.puts "WARN: can't parse #{node.name}: #{value}"
@@ -247,7 +248,16 @@ module POSIX
       definition = String.build do |str|
         str << "  " << node.kind << " " << crname(name || node.unscoped_name) << "\n"
 
+        field_names = [] of String
+
         node.fields.each_with_index do |field, index|
+          # FIXME: fixes a bug on gnu64 includes where `in_addr` is reported as
+          #        having `s_addr` twice...
+          unless (field_name = field.name).empty?
+            next if field_names.includes?(field_name)
+            field_names << field_name
+          end
+
           type = field.type
 
           case type = field.type
@@ -280,6 +290,7 @@ module POSIX
     def transform(io, node : CrystalLib::Typedef)
       name, type = node.name, node.type
 
+      # avoids "private" definitions starting with underscores
       while type.is_a?(CrystalLib::TypedefType)
         break unless type.name.starts_with?('_')
         type = type.type
@@ -294,9 +305,9 @@ module POSIX
       elsif type.is_a?(CrystalLib::Enum)
         transform(io, type, name)
       else
-        __type = crtype(type)
+        _type = crtype(type)
 
-        if __type == "Void*"
+        if _type == "Void*"
           io << "  type " << crname(name) << " = Void*\n"
         else
           if type.is_a?(CrystalLib::PointerType)
@@ -306,7 +317,7 @@ module POSIX
             end
             transform(io, node)
           end
-          io << "  alias " << crname(name) << " = " << __type << "\n"
+          io << "  alias " << crname(name) << " = " << _type << "\n"
         end
       end
     end
@@ -371,7 +382,11 @@ module POSIX
       when /\s/
         cname.split(/\s+/).map { |cn| crname(cn) as String }.join
       when /^[A-Z]/
-        cname
+        if cname.includes?('_')
+          cname.downcase.camelcase
+        else
+          cname
+        end
       else
         cname.downcase.camelcase
       end
@@ -384,7 +399,7 @@ module POSIX
         if (ref = ctype.type).is_a?(CrystalLib::NodeRef)
           # avoids private struct reference
           if (_node = ref.node).is_a?(CrystalLib::StructOrUnion)
-            if _node.unscoped_name != "" && !_node.name.starts_with?('_')
+            if _node.unscoped_name != "" && !_node.unscoped_name.starts_with?('_')
               ctype = _node
               name = ctype.unscoped_name
             end
@@ -426,6 +441,8 @@ module POSIX
       when CrystalLib::FunctionType
         inputs = ctype.inputs.map { |arg| crtype(arg) as String }.join(", ")
         "#{inputs} -> #{crtype(ctype.output)}"
+      when CrystalLib::ErrorType
+        crname(ctype.name)
       else
         raise "unsupported type: #{ctype.inspect}"
       end
@@ -498,7 +515,11 @@ module POSIX
         value = "#{t}.new(#{v})"
       end
 
-      value
+      if value =~ /^[A-Z][A-Z0-9_]+$/
+        "LibC::#{value}"
+      else
+        value
+      end
     end
 
     # Extract long bit size from limits.h.
@@ -527,6 +548,7 @@ module POSIX
     def header
       String.build do |str|
         str << "#define __CYGWIN__ 1\n"
+        str << "#define _GNU_SOURCE 1\n"
         str << "#define _GCC_LIMITS_H_ 1\n"
         #str << "#define _POSIX_C_SOURCE 200809L\n"
         #str << "#define _XOPEN_SOURCE 700\n"
@@ -555,10 +577,6 @@ module POSIX
       end
     end
 
-    def source
-      @source ||= YAML.parse(File.read(source_path)).raw as Hash
-    end
-
     def libraries
       if libs = source["libraries"]?
         case libs
@@ -572,6 +590,10 @@ module POSIX
           end
         end
       end
+    end
+
+    def source
+      @source ||= YAML.parse(File.read(source_path)).raw as Hash
     end
 
     def source_path

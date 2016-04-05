@@ -33,6 +33,10 @@ constants:
   - EAI_SYSTEM
   - EAI_OVERFLOW
 
+  # not posix
+  - NI_MAXHOST
+  - NI_MAXSERV
+
 structs:
   - hostent
   - netent
