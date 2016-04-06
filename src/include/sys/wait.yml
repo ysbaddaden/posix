@@ -5,7 +5,7 @@ requires:
   - sys/types
   - signal
 
-map:
+maps:
   __wait_status_ptr_t: Int* # cygwin
   __WAIT_STATUS: Int*       # gnu
 

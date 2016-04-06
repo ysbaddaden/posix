@@ -4,7 +4,7 @@ includes:
 requires:
   - sys/stat
 
-map:
+maps:
   __ftw_func_t: Char*, Stat*, Int -> Int # gnu
 
 constants:

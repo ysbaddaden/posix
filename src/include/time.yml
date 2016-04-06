@@ -6,7 +6,7 @@ requires:
   - locale
   #- signal # cygwin
 
-#map:
+#maps:
 #  sigevent: void  # cygwin
 
 constants:

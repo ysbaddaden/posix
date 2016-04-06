@@ -4,7 +4,7 @@ includes:
 requires:
   - sys/types
 
-map:
+maps:
   __compar_fn_t: "Void* -> Int" # gnu
   __action_fn_t: "Int -> Void"  # gnu
 

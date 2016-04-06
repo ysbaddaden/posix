@@ -5,7 +5,7 @@ requires:
   - sys/types
   #- sys/select
 
-map:
+maps:
   __timezone_ptr_t: void* # gnu
 
 structs:

@@ -5,7 +5,7 @@ requires:
   - sys/types
   - sys/uio
 
-map:
+maps:
   __SOCKADDR_ARG: sockaddr* # gnu
   __CONST_SOCKADDR_ARG: sockaddr* # gnu
 

@@ -6,7 +6,7 @@ requires:
   - sys/ipc
   - time # cygwin
 
-map:
+maps:
   timestruc_t: timespec # cygwin
 
 constants:

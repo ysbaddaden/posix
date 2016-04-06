@@ -7,7 +7,7 @@ requires:
   - limits
   - math
 
-map:
+maps:
   __compar_fn_t: "Void* -> Int" # gnu
 
 types:
