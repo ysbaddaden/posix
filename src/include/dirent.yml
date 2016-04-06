@@ -5,7 +5,7 @@ requires:
 - sys/types
 
 types:
-  - DIR
+  - DIR = Void
 
 structs:
   - dirent
