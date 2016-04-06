@@ -12,6 +12,7 @@ module POSIX
       structs:   { type: Array(String), nilable: true },
       functions: { type: Array(String), nilable: true },
       variables: { type: Array(String), nilable: true },
+      aliases:   { type: Hash(String, String), nilable: true },
       maps:      { type: Hash(String, String), nilable: true },
       libraries: { type: Hash(String, Array(String)), nilable: true },
     })

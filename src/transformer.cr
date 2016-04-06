@@ -95,7 +95,7 @@ module POSIX
       io << "\n"
 
       definition.aliases do |name, value|
-        io << "  alias #{crname(name)} = #{crname(value)}"
+        io << "  alias #{crname(name)} = #{crname(value)}\n"
       end
       io << "\n"
 

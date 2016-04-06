@@ -16,7 +16,7 @@ structs:
   - ENTRY
 
 aliases:
-  entry: ENTRY # musl
+  entry: ENTRY # darwin, gnu, musl
 
 functions:
   - hcreate
