@@ -16,11 +16,13 @@ lib LibC
     alias ULong = UInt64
   elsif i686
     alias Long = Int32
-    alias ULong = Int32
+    alias ULong = UInt32
   end
 
   alias LongLong = Int64
   alias ULongLong = UInt64
   alias Float = Float32
   alias Double = Float64
+
+  $environ : Char**
 end

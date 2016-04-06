@@ -1,4 +1,5 @@
-require "./transform"
+require "./definition"
+require "./transformer"
 require "option_parser"
 
 module H2CR
@@ -64,7 +65,8 @@ module H2CR
 
     names.each do |name|
       path = File.join("targets", options.target, "c", "#{name}.cr")
-      transformer = POSIX::Transformer.new(name, bits: options.bits, abi: options.abi)
+      definition = POSIX::Definition.load(name, options.abi)
+      transformer = POSIX::Transformer.new(definition, bits: options.bits)
 
       if options.debug
         puts "# #{path}"

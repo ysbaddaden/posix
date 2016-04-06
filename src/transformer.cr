@@ -1,4 +1,3 @@
-require "yaml"
 require "crystal_lib"
 require "crystal_lib/clang"
 require "compiler/crystal/formatter"
@@ -32,19 +31,17 @@ end
 
 module POSIX
   class Transformer
-    getter name
+    getter definition
     getter nodes
     getter resolver
     private getter requirements
     private getter processed
 
-    def initialize(name, @bits = nil, @abi = nil)
-      @name = name.to_s
-
+    def initialize(@definition, @bits = nil)
       @resolver = Resolver.new
       @nodes = CrystalLib::Parser.parse(header)
 
-      maps { |name, value| resolver.map_default(name, value) }
+      definition.maps { |name, value| resolver.map_default(name, value) }
       @nodes.each { |node| resolver.map_recursive(node) }
 
       @requirements = [] of String
@@ -57,11 +54,11 @@ module POSIX
     end
 
     def transform(io : IO)
-      requires do |name|
+      definition.requires do |name|
         _name = name as String
-        if File.dirname(_name) == File.dirname(@name)
+        if File.dirname(_name) == File.dirname(definition.name)
           io << "require \"./#{File.basename(_name)}\"\n"
-        elsif File.dirname(@name) != "."
+        elsif File.dirname(definition.name) != "."
           io << "require \"../#{_name}\"\n"
         else
           io << "require \"./#{_name}\"\n"
@@ -69,19 +66,19 @@ module POSIX
       end
       io << "\n"
 
-      if libs = libraries
+      if libs = definition.libraries
         io << "@[Link(" << libs.map(&.inspect).join(", ") << ")]\n"
       end
 
       io << "lib LibC\n"
 
-      constants { |name| transform(io, name, :constant) }
+      definition.constants { |name| transform(io, name, :constant) }
       io << "\n"
 
-      enums { |name| transform(io, name, :enum) }
+      definition.enums { |name| transform(io, name, :enum) }
       io << "\n"
 
-      types do |name|
+      definition.types do |name|
         if name.index('=')
           name, type = name.split('=', 2).map(&.strip)
           io << "  type " << name << " = " << type << "\n"
@@ -91,18 +88,18 @@ module POSIX
       end
       io << "\n"
 
-      unions { |name| transform(io, name, :union) }
+      definition.unions { |name| transform(io, name, :union) }
       io << "\n"
 
-      structs { |name| transform(io, name, :struct) }
+      definition.structs { |name| transform(io, name, :struct) }
       io << "\n"
 
-      aliases do |name, value|
+      definition.aliases do |name, value|
         io << "  alias #{crname(name)} = #{crname(value)}"
       end
       io << "\n"
 
-      functions do |name|
+      definition.functions do |name|
         if name.index('\n')
           flags = name.strip.split('\n')
           name = flags.pop
@@ -121,7 +118,7 @@ module POSIX
       end
       io << "\n"
 
-      variables { |name| transform(io, name, :variable) }
+      definition.variables { |name| transform(io, name, :variable) }
       io << "\n"
 
       until requirements.empty?
@@ -553,55 +550,8 @@ module POSIX
         #str << "#define _POSIX_C_SOURCE 200809L\n"
         #str << "#define _XOPEN_SOURCE 700\n"
         str << "#include <limits.h>\n"
-        includes { |h| str << "#include <#{h}.h>\n" }
+        definition.includes { |h| str << "#include <#{h}.h>\n" }
       end
     end
-
-    {% for kind in %w(includes requires constants enums types unions structs functions variables) %}
-      def {{kind.id}}
-        if list = source[{{kind}}]?
-          (list as Array).each { |item| yield(item as String) }
-        end
-      end
-    {% end %}
-
-    def maps
-      if list = source["map"]?
-        (list as Hash).each { |name, value| yield(name as String, value as String) }
-      end
-    end
-
-    def aliases
-      if list = source["aliases"]?
-        (list as Hash).each { |name, value| yield(name as String, value as String) }
-      end
-    end
-
-    def libraries
-      if libs = source["libraries"]?
-        case libs
-        when Array
-          libs
-        when Hash
-          if abi = @abi
-            if _libs = (libs as Hash)[abi]?
-              _libs as Array
-            end
-          end
-        end
-      end
-    end
-
-    def source
-      @source ||= YAML.parse(File.read(source_path)).raw as Hash
-    end
-
-    def source_path
-      File.join(__DIR__, "include/#{name}.yml")
-    end
-  end
-
-  def self.transform(name)
-    Transformer.new(name).transform
   end
 end
