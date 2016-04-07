@@ -61,9 +61,14 @@ module H2CR
 
     names ||= Dir[File.join(__DIR__, "include", "**", "*.yml")]
       .map { |name| name.sub(File.join(__DIR__, "include", ""), "").sub(".yml", "") }
-      .sort
 
     names.each do |name|
+      POSIX::Definition.load(name, options.abi).requires do |dep|
+        names << dep unless names.includes?(dep)
+      end
+    end
+
+    names.sort.each do |name|
       path = File.join("targets", options.target, "c", "#{name}.cr")
       definition = POSIX::Definition.load(name, options.abi)
       transformer = POSIX::Transformer.new(definition, bits: options.bits)

@@ -3,6 +3,10 @@ CRYSTAL_BIN ?= crystal
 TMP = /tmp/crystal-posix-test
 TEST = rm -f $(TMP); $(CRYSTAL_BIN) build --prelude=empty -o $(TMP) src/base.cr
 
+SOURCES = arpa/inet dirent dlfcn errno fcntl iconv netdb netinet/in netinet/tcp \
+	pthread signal stdio stdlib string sys/mman sys/select sys/socket sys/stat \
+	sys/time sys/times sys/un sys/wait termios time unistd
+
 TARGET := $(subst -, ,$(shell \
 	llvm-config-3.6 --host-target 2>/dev/null || \
 	llvm-config-3.5 --host-target 2>/dev/null || \
@@ -14,7 +18,7 @@ SYS ?= $(word 3,$(TARGET))
 ABI ?= $(word 4,$(TARGET))
 
 all: bin/main
-	$(MAIN) --arch=$(ARCH) --sys=$(SYS) --abi=$(ABI)
+	$(MAIN) --arch=$(ARCH) --sys=$(SYS) --abi=$(ABI) $(SOURCES)
 
 bin/main: src/*.cr
 	@mkdir -p bin
@@ -44,8 +48,9 @@ macosx: bin/main
 windows: bin/main
 	CPATH=include/cygwin $(MAIN) --arch=x86 --sys=win32 --abi=cygwin
 
+.PHONY: test
 test:
-	for target in src/c/*; do\
+	for target in targets/*; do\
 	  echo $$target;\
 	  for file in `find $$target -iname "*.cr"`; do\
 		$(TEST) $$file;\
