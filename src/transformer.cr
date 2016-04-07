@@ -329,6 +329,9 @@ module POSIX
       if node.args.any? || node.variadic?
         io << '('
 
+        # FIXME: fun signal is wrongly identified as taking 3 params on darwin target
+        node.args.shift if node.name == "signal" && node.args.size == 3
+
         node.args.each_with_index do |arg, index|
           name = arg.name == "" ? "x#{index}" : arg.name
           name = name.sub(/^_+/, "")
