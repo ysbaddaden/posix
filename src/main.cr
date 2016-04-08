@@ -62,9 +62,11 @@ module H2CR
     names ||= Dir[File.join(__DIR__, "include", "**", "*.yml")]
       .map { |name| name.sub(File.join(__DIR__, "include", ""), "").sub(".yml", "") }
 
-    names.each do |name|
-      POSIX::Definition.load(name, options.abi).requires do |dep|
-        names << dep unless names.includes?(dep)
+    unless options.debug
+      names.each do |name|
+        POSIX::Definition.load(name, options.abi).requires do |dep|
+          names << dep unless names.includes?(dep)
+        end
       end
     end
 
