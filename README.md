@@ -1,7 +1,8 @@
 # C bindings for Crystal
 
 Follows the IEEE Std 1003.1, 2013 Edition (The Open Group Base Specifications
-Issue 7) as much as libc implementations do.
+Issue 7) as much as libc implementations do, along with some common additions
+that are required by Crystal.
 
 Bindings are automatically generated with CrystalLib from C headers.
 
@@ -24,18 +25,18 @@ will be checked when headers have been verified to be compliant.
 
 - FreeBSD
   - [ ] `x86`
-  - [ ] `x86_64`
+  - [x] `x86_64`
 
 - iOS
   - [ ] `arm`
   - [ ] `arm64`
 
 - Linux
-  - [ ] gnu (`x86`, `x86_64`)
-  - [ ] musl (`x86`, `x86_64`)
+  - [x] gnu (`x86`, `x86_64`)
+  - [x] musl (`x86`, `x86_64`)
 
 - Mac OSX
-  - [ ] darwin (`x86_64`)
+  - [x] darwin (`x86_64`)
 
 - Windows
   - [ ] cygwin
@@ -113,7 +114,7 @@ will be checked when headers have been verified to be compliant.
 - [x] `sys/wait.h`
 - [x] `syslog.h`
 - [ ] `tar.h`
-- [ ] `termios.h`
+- [x] `termios.h`
 - [ ] `tgmath.h`
 - [x] `time.h`
 - [ ] `trace.h`
