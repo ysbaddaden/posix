@@ -8,3 +8,6 @@ constants:
   - TCP_KEEPIDLE
   - TCP_KEEPINTVL
   - TCP_KEEPCNT
+
+  # darwin
+  - TCP_KEEPALIVE

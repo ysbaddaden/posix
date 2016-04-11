@@ -547,11 +547,20 @@ module POSIX
 
     def header
       String.build do |str|
+        # cygwin
         str << "#define __CYGWIN__ 1\n"
+
+        # gnu
         str << "#define _GNU_SOURCE 1\n"
         str << "#define _GCC_LIMITS_H_ 1\n"
+
+        # darwin
+        str << "#define _DARWIN_NO_64_BIT_INODE\n" # dirent / stat
+        str << "#define lint\n"                    # ntohs, ...
+
         #str << "#define _POSIX_C_SOURCE 200809L\n"
         #str << "#define _XOPEN_SOURCE 700\n"
+
         str << "#include <limits.h>\n"
         definition.includes { |h| str << "#include <#{h}.h>\n" }
       end
