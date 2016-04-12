@@ -20,6 +20,7 @@ structs:
 
 aliases:
   sigaltstack: stack_t
+  siginfo: siginfo_t # gnu/i686, android
 
 constants:
   # FIXME: can't generate crystal code

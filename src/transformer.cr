@@ -553,9 +553,10 @@ module POSIX
         # gnu
         str << "#define _GNU_SOURCE 1\n"
         str << "#define _GCC_LIMITS_H_ 1\n"
+        #str << "#undef __x86_64__\n" unless bits == 64 # LFS (i686)
 
         # darwin
-        str << "#define _DARWIN_NO_64_BIT_INODE\n" # dirent / stat
+        str << "#define _DARWIN_NO_64_BIT_INODE\n" # FIXME: LFS
         str << "#define lint\n"                    # ntohs, ...
 
         #str << "#define _POSIX_C_SOURCE 200809L\n"

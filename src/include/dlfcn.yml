@@ -13,6 +13,9 @@ constants:
   - RTLD_GLOBAL
   - RTLD_LOCAL
 
+  - RTLD_DEFAULT
+  - RTLD_NEXT
+
 structs:
   # not posix
   - Dl_info
