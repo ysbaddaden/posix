@@ -3,7 +3,7 @@ includes:
 
 requires:
   - stddef
-  - locale
+  #- locale
 
 functions:
   - ffs

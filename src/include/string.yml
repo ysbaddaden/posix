@@ -3,7 +3,7 @@ includes:
 
 requires:
   - stddef
-  - locale
+  #- locale
 
 functions:
   - memccpy
@@ -17,13 +17,13 @@ functions:
   - strcat
   - strchr
   - strcmp
-  - strcoll
-  - strcoll_l
+  #- strcoll
+  #- strcoll_l
   - strcpy
   - strcspn
   - strdup
   - strerror
-  - strerror_l
+  #- strerror_l
   - strerror_r
   - strlen
   - strncat
@@ -39,4 +39,4 @@ functions:
   - strtok
   - strtok_r
   - strxfrm
-  - strxfrm_l
+    #- strxfrm_l

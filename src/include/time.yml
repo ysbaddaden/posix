@@ -3,7 +3,7 @@ includes:
 
 requires:
   - sys/types
-  - locale
+  #- locale
   #- signal # cygwin
 
 #maps:
@@ -40,7 +40,7 @@ functions:
   - mktime
   - nanosleep
   - strftime
-  - strftime_l
+  #- strftime_l
   - strptime
   - time
   - timer_create
