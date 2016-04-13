@@ -17,7 +17,7 @@ module POSIX
       libraries: { type: Hash(String, Array(String)), nilable: true },
     })
 
-    def self.load(name : String, abi : String)
+    def self.load(name, abi)
       definition = from_yaml(File.read(path(name)))
       definition.name = name
       definition.abi = abi
@@ -28,7 +28,8 @@ module POSIX
       File.join(__DIR__, "include/#{name}.yml")
     end
 
-    property! name, abi
+    property! name : String
+    property! abi : String
 
     {% for kind in %w(includes requires constants enums types unions structs functions variables) %}
       def {{kind.id}}

@@ -31,13 +31,14 @@ end
 
 module POSIX
   class Transformer
-    getter definition
-    getter nodes
-    getter resolver
+    getter definition : Definition
+    getter nodes : Array(CrystalLib::ASTNode)
+    getter resolver : Resolver
+
     private getter requirements
     private getter processed
 
-    def initialize(@definition, @bits = nil)
+    def initialize(@definition, @bits : Int32 = nil)
       @resolver = Resolver.new
       @nodes = CrystalLib::Parser.parse(header)
 

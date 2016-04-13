@@ -77,6 +77,8 @@ module POSIX
       types[name.to_s] = value.to_s
     end
 
+    @outer_typedef : CrystalLib::ASTNode?
+
     def map_recursive(node)
       if node.is_a?(CrystalLib::Typedef)
         @outer_typedef = node

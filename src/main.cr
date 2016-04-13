@@ -21,7 +21,7 @@ module H2CR
     end
 
     def target
-      @target ||= {arch, sys, abi}.join('-')
+      {arch, sys, abi}.join('-')
     end
   end
 
