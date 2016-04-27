@@ -8,9 +8,11 @@ module H2CR
     property sys : String
     property abi : String
     property debug : Bool
+    property source : String
 
     def initialize(@arch = "unknown", @sys = "unknown", @abi = "unknown")
       @debug = false
+      @source = File.join(Dir.current, "include", "posix")
     end
 
     def bits=(@bits : Int32)
@@ -47,6 +49,10 @@ module H2CR
       options.bits = n.to_i
     end
 
+    parser.on("--source=PATH", "Force the LONG bit size (32, 64)") do |source|
+      options.source = source
+    end
+
     parser.on("--debug", "Print the bindings to STDOUT") do
       options.debug = true
     end
@@ -59,20 +65,20 @@ module H2CR
     names = parser.parse(ARGV)
     names = nil if names.try(&.empty?)
 
-    names ||= Dir[File.join(__DIR__, "include", "**", "*.yml")]
-      .map { |name| name.sub(File.join(__DIR__, "include", ""), "").sub(".yml", "") }
+    names ||= Dir[File.join(options.source, "**", "*.yml")]
+      .map { |name| name.sub(File.join(options.source, ""), "").sub(".yml", "") }
 
-    unless options.debug
-      names.each do |name|
-        POSIX::Definition.load(name, options.abi).requires do |dep|
-          names << dep unless names.includes?(dep)
-        end
-      end
-    end
+    #unless options.debug
+    #  names.each do |name|
+    #    POSIX::Definition.load(name, options.source, options.abi).requires do |dep|
+    #      names << dep unless names.includes?(dep)
+    #    end
+    #  end
+    #end
 
     names.sort.each do |name|
       path = File.join("targets", options.target, "c", "#{name}.cr")
-      definition = POSIX::Definition.load(name, options.abi)
+      definition = POSIX::Definition.load(name, options.source, options.abi)
       transformer = POSIX::Transformer.new(definition, bits: options.bits)
 
       if options.debug

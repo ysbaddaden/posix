@@ -1,0 +1,110 @@
+includes:
+  - signal
+
+requires:
+  - sys/types
+  - time
+
+#types:
+#  - sig_atomic_t
+#  - sigset_t
+#  - mcontext_t
+
+structs:
+  #- sigaction
+  #- sigevent
+  #- siginfo_t
+  #- sigval
+  #- stack_t
+  #- ucontext_t
+
+#aliases:
+#  sigaltstack: stack_t
+#  siginfo: siginfo_t # gnu/i686, android
+
+constants:
+  # FIXME: can't generate crystal code
+  #- SIG_DFL
+  #- SIG_ERR
+  #- SIG_IGN
+
+  #- SIGEV_NONE
+  #- SIGEV_SIGNAL
+  #- SIGEV_THREAD
+
+  - SIGHUP
+  - SIGINT
+  - SIGQUIT
+  - SIGILL
+  - SIGTRAP
+  - SIGIOT
+  - SIGABRT
+  - SIGFPE
+  - SIGKILL
+  - SIGBUS
+  - SIGSEGV
+  - SIGSYS
+  - SIGPIPE
+  - SIGALRM
+  - SIGTERM
+  - SIGURG
+  - SIGSTOP
+  - SIGTSTP
+  - SIGCONT
+  - SIGCHLD
+  - SIGCLD
+  - SIGTTIN
+  - SIGTTOU
+  - SIGIO
+  - SIGXCPU
+  - SIGXFSZ
+  - SIGVTALRM
+  - SIGUSR1
+  - SIGUSR2
+
+  - SIGEMT  # darwin
+  - SIGINFO # darwin
+  - SIGWINCH # darwin, gnu, musl
+  - SIGPWR    # gnu, musl
+  - SIGSTKFLT # gnu, musl
+  - SIGUNUSED # gnu, musl
+
+    #- SIG_BLOCK
+    #- SIG_UNBLOCK
+    #- SIG_SETMASK
+  - SA_NOCLDSTOP
+  - SA_ONSTACK
+  - SA_RESETHAND
+  - SA_RESTART
+  - SA_SIGINFO
+  - SA_NOCLDWAIT
+  - SA_NODEFER
+  #- SS_ONSTACK
+  #- SS_DISABLE
+  - MINSIGSTKSZ
+  - SIGSTKSZ
+
+functions:
+  - kill
+  - killpg
+  #- psiginfo
+  #- psignal
+  #- pthread_kill
+  #- pthread_sigmask
+  #- raise
+  #- sigaction
+  #- sigaddset
+  #- sigaltstack
+  #- sigdelset
+  #- sigemptyset
+  #- sigfillset
+  #- sigismember
+  - signal
+  #- sigpause
+  #- sigpending
+  #- sigprocmask
+  #- sigqueue
+  #- sigsuspend
+  #- sigtimedwait
+  #- sigwait
+  #- sigwaitinfo

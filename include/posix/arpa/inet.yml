@@ -1,0 +1,17 @@
+includes:
+  - arpa/inet
+
+requires:
+  - netinet/in
+  - stdint
+
+functions:
+  - htonl
+  - htons
+  - ntohl
+  - ntohs
+
+  - inet_addr
+  - inet_ntoa
+  - inet_ntop
+  - inet_pton

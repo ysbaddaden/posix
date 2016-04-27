@@ -1,6 +1,6 @@
 /.crystal
 /.shards
 /libs
-/include
 /doc
 /targets
+/.vagrant

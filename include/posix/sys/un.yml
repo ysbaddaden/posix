@@ -1,0 +1,8 @@
+includes:
+  - sys/un
+
+requires:
+  - sys/socket
+
+structs:
+  - sockaddr_un

@@ -1,0 +1,24 @@
+includes:
+  - dirent
+
+requires:
+- sys/types
+
+types:
+  - DIR = Void
+
+structs:
+  - dirent
+
+functions:
+  #- alphasort
+  - closedir
+  #- dirfd
+  #- fdopendir
+  - opendir
+  - readdir
+  - readdir_r
+  - rewinddir
+  #- scandir
+  #- seekdir
+  #- telldir

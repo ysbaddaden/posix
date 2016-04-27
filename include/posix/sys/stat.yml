@@ -1,0 +1,70 @@
+includes:
+  - sys/stat
+
+requires:
+  - sys/types
+  - time
+
+constants:
+  - S_IFMT
+  - S_IFBLK
+  - S_IFCHR
+  - S_IFIFO
+  - S_IFREG
+  - S_IFDIR
+  - S_IFLNK
+  - S_IFSOCK
+
+  - S_IRUSR
+  - S_IWUSR
+  - S_IXUSR
+  - S_IRWXU
+  - S_IRGRP
+  - S_IWGRP
+  - S_IXGRP
+  - S_IRWXG
+  - S_IROTH
+  - S_IWOTH
+  - S_IXOTH
+  - S_IRWXO
+
+  - S_ISUID
+  - S_ISGID
+  - S_ISVTX
+
+#macros:
+#  - S_ISBLK(m)
+#  - S_ISCHR(m)
+#  - S_ISDIR(m)
+#  - S_ISFIFO(m)
+#  - S_ISREG(m)
+#  - S_ISLNK(m)
+#  - S_ISSOCK(m)
+#  - S_TYPEISMQ(buf)
+#  - S_TYPEISSEM(buf)
+#  - S_TYPEISSHM(buf)
+#  - S_TYPEISTMO(buf)
+
+types:
+  - fflags_t # freebsd
+
+structs:
+  - stat
+
+functions:
+  - chmod
+  - fchmod
+  - fchmodat
+  - fstat
+  - fstatat
+  - futimens
+  - lstat
+  - mkdir
+  - mkdirat
+  - mkfifo
+  - mkfifoat
+  - mknod
+  - mknodat
+  - stat
+  - umask
+  - utimensat

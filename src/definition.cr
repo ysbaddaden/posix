@@ -17,15 +17,15 @@ module POSIX
       libraries: { type: Hash(String, Array(String)), nilable: true },
     })
 
-    def self.load(name, abi)
-      definition = from_yaml(File.read(path(name)))
+    def self.load(name, source, abi)
+      definition = from_yaml(File.read(path(name, source)))
       definition.name = name
       definition.abi = abi
       definition
     end
 
-    def self.path(name)
-      File.join(__DIR__, "include/#{name}.yml")
+    def self.path(name, source)
+      File.join(source, "#{name}.yml")
     end
 
     property! name : String

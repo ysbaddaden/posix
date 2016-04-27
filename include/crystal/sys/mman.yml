@@ -1,0 +1,70 @@
+includes:
+  - sys/mman
+
+requires:
+  - sys/types
+
+constants:
+  - PROT_EXEC
+  - PROT_NONE
+  - PROT_READ
+  - PROT_WRITE
+
+  - MAP_FIXED
+  - MAP_PRIVATE
+  - MAP_SHARED
+
+  # not posix
+  - MAP_ANON
+  - MAP_ANONYMOUS
+
+  #- MS_ASYNC
+  #- MS_INVALIDATE
+  #- MS_SYNC
+
+  #- MCL_CURRENT
+  #- MCL_FUTURE
+
+  - MAP_FAILED
+
+  - POSIX_MADV_DONTNEED
+  - POSIX_MADV_NORMAL
+  - POSIX_MADV_RANDOM
+  - POSIX_MADV_SEQUENTIAL
+  - POSIX_MADV_WILLNEED
+
+  #- POSIX_TYPED_MEM_ALLOCATE
+  #- POSIX_TYPED_MEM_ALLOCATE_CONTIG
+  #- POSIX_TYPED_MEM_MAP_ALLOCATABLE
+
+  # not posix
+  - MADV_DONTNEED
+  - MADV_NORMAL
+  - MADV_RANDOM
+  - MADV_SEQUENTIAL
+  - MADV_WILLNEED
+  - MADV_HUGEPAGE
+  - MADV_NOHUGEPAGE
+
+#structs:
+#  - posix_typed_mem_info
+
+functions:
+  #- mlock
+  #- mlockall
+  - mmap
+  - mprotect
+  #- msync
+  #- munlock
+  #- munlockall
+  - munmap
+  #- shm_open
+  #- shm_unlink
+
+  #- posix_madvise
+  #- posix_mem_offset
+  #- posix_typed_mem_get_info
+  #- posix_typed_mem_open
+
+  # not posix
+  - madvise

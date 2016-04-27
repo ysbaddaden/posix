@@ -1,0 +1,74 @@
+includes:
+  - fcntl
+
+requires:
+  - sys/types
+  - sys/stat
+  - unistd
+
+constants:
+  - F_DUPFD
+  - F_DUPFD_CLOEXEC
+  - F_GETFD
+  - F_SETFD
+  - F_GETFL
+  - F_SETFL
+  - F_GETLK
+  - F_SETLK
+  - F_SETLKW
+  - F_GETOWN
+  - F_SETOWN
+
+  - FD_CLOEXEC
+  - F_RDLCK
+  - F_UNLCK
+  - F_WRLCK
+
+  - O_CLOEXEC
+  - O_CREAT
+  - O_DIRECTORY
+  - O_EXCL
+  - O_NOCTTY
+  - O_NOFOLLOW
+  - O_TRUNC
+
+  - O_TTY_INIT
+
+  - O_APPEND
+  - O_DSYNC
+  - O_NONBLOCK
+  - O_SYNC
+  - O_RSYNC
+
+  - O_PATH # musl-libc
+  - O_EXEC
+  - O_RDONLY
+  - O_RDWR
+  - O_SEARCH
+  - O_WRONLY
+
+  - O_ACCMODE
+
+  #- AT_FDCWD
+  #- AT_EACCESS
+  #- AT_SYMLINK_NOFOLLOW
+  #- AT_SYMLINK_FOLLOW
+  #- AT_REMOVEDIR
+
+  #- POSIX_FADV_DONTNEED
+  #- POSIX_FADV_NOREUSE
+  #- POSIX_FADV_NORMAL
+  #- POSIX_FADV_RANDOM
+  #- POSIX_FADV_SEQUENTIAL
+  #- POSIX_FADV_WILLNEED
+
+structs:
+  - flock
+
+functions:
+  #- creat
+  - fcntl
+  - open
+  - openat
+  #- posix_fadvise
+  #- posix_fallocate

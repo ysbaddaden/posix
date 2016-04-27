@@ -1,0 +1,13 @@
+includes:
+  - netinet/tcp
+
+constants:
+  - TCP_NODELAY
+
+  # not posix
+  - TCP_KEEPIDLE
+  - TCP_KEEPINTVL
+  - TCP_KEEPCNT
+
+  # darwin
+  - TCP_KEEPALIVE

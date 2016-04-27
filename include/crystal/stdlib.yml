@@ -1,0 +1,97 @@
+includes:
+  - stdlib
+
+requires:
+  - stddef
+  - sys/wait
+  #- limits
+  - math
+
+maps:
+  __compar_fn_t: "Void* -> Int" # gnu
+
+types:
+  - div_t
+  #- ldiv_t
+  #- lldiv_t
+
+#macros:
+#  - MB_CUR_MAX = MB_CUR_MAX
+#  - WIFEXITED
+#  - WEXITSTATUS
+#  - WIFSIGNALED
+#  - WIFSTOPPED
+#  - WSTOPSIG
+#  - WTERMSIG
+
+constants:
+  - EXIT_FAILURE
+  - EXIT_SUCCESS
+  #- RAND_MAX
+
+functions:
+  #- "_Exit : NoReturn"
+  #- a64l
+  #- abort
+  #- abs
+  #- atexit
+  - atof
+  #- atoi
+  #- atol
+  #- atoll
+  #- bsearch
+  #- calloc
+  - div
+  #- drand48
+  #- erand48
+  - "exit : NoReturn"
+  - free
+  - getenv
+  #- getsubopt
+  #- grantpt
+  #- initstate
+  #- jrand48
+  #- l64a
+  #- labs
+  #- lcong48
+  #- ldiv
+  #- llabs
+  #- lldiv
+  #- lrand48
+  - malloc
+  #- mblen
+  #- mbstowcs
+  #- mbtowc
+  #- mkdtemp
+  - mkstemp
+  #- mrand48
+  #- nrand48
+  #- posix_memalign
+  #- posix_openpt
+  #- ptsname
+  - putenv
+  #- qsort
+  #- rand
+  #- random
+  - realloc
+  - realpath
+  #- seed48
+  - setenv
+  #- setkey
+  #- setstate
+  #- srand
+  #- srand48
+  #- srandom
+  #- strtod
+  - strtof
+  #- strtol
+  # NOTE: crystal doesn't support "long double"
+  #- strtold
+  #- strtoll
+  #- strtoul
+  #- strtoull
+  - system
+  #- unlockpt
+  - unsetenv
+  #- wcstombs
+  #- wctomb
