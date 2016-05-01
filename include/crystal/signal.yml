@@ -10,13 +10,13 @@ requires:
 #  - sigset_t
 #  - mcontext_t
 
-structs:
-  #- sigaction
-  #- sigevent
-  #- siginfo_t
-  #- sigval
-  #- stack_t
-  #- ucontext_t
+#structs:
+#  - sigaction
+#  - sigevent
+#  - siginfo_t
+#  - sigval
+#  - stack_t
+#  - ucontext_t
 
 #aliases:
 #  sigaltstack: stack_t
@@ -69,24 +69,24 @@ constants:
   - SIGSTKFLT # gnu, musl
   - SIGUNUSED # gnu, musl
 
-    #- SIG_BLOCK
-    #- SIG_UNBLOCK
-    #- SIG_SETMASK
-  - SA_NOCLDSTOP
-  - SA_ONSTACK
-  - SA_RESETHAND
-  - SA_RESTART
-  - SA_SIGINFO
-  - SA_NOCLDWAIT
-  - SA_NODEFER
+  #- SIG_BLOCK
+  #- SIG_UNBLOCK
+  #- SIG_SETMASK
+  #- SA_NOCLDSTOP
+  #- SA_ONSTACK
+  #- SA_RESETHAND
+  #- SA_RESTART
+  #- SA_SIGINFO
+  #- SA_NOCLDWAIT
+  #- SA_NODEFER
   #- SS_ONSTACK
   #- SS_DISABLE
-  - MINSIGSTKSZ
-  - SIGSTKSZ
+  #- MINSIGSTKSZ
+  #- SIGSTKSZ
 
 functions:
   - kill
-  - killpg
+  #- killpg
   #- psiginfo
   #- psignal
   #- pthread_kill

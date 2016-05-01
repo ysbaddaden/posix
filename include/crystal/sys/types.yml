@@ -42,3 +42,7 @@ types:
   - time_t
   #- timer_t
   - uid_t
+
+  # not posix
+  - pthread_spin_t # netbsd
+  - pthread_queue_struct_t # netbsd

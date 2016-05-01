@@ -19,13 +19,13 @@ maps:
 #  - WTERMSIG
 
 constants:
-  - WCONTINUED
+  #- WCONTINUED
   - WNOHANG
-  - WUNTRACED
+  #- WUNTRACED
 
-  - WEXITED
-  - WNOWAIT
-  - WSTOPPED
+  #- WEXITED
+  #- WNOWAIT
+  #- WSTOPPED
 
 #types:
 #  - idtype_t

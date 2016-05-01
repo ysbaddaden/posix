@@ -134,7 +134,7 @@ functions:
   #- tcflush
   - tcgetattr
   #- tcgetsid
-  - tcsendbreak
+  #- tcsendbreak
   - tcsetattr
 
   # not posix

@@ -24,24 +24,24 @@ constants:
 
   - SOL_SOCKET
 
-  - SO_ACCEPTCONN
-  - SO_BROADCAST
-  - SO_DEBUG
-  - SO_DONTROUTE
-  - SO_ERROR
+  #- SO_ACCEPTCONN
+  #- SO_BROADCAST
+  #- SO_DEBUG
+  #- SO_DONTROUTE
+  #- SO_ERROR
   - SO_KEEPALIVE
   - SO_LINGER
-  - SO_OOBINLINE
+  #- SO_OOBINLINE
   - SO_RCVBUF
-  - SO_RCVLOWAT
-  - SO_RCVTIMEO
+  #- SO_RCVLOWAT
+  #- SO_RCVTIMEO
   - SO_REUSEADDR
   - SO_SNDBUF
-  - SO_SNDLOWAT
-  - SO_SNDTIMEO
-  - SO_TYPE
+  #- SO_SNDLOWAT
+  #- SO_SNDTIMEO
+  #- SO_TYPE
 
-  - SOMAXCONN
+  #- SOMAXCONN
 
   #- MSG_CTRUNC
   #- MSG_DONTROUTE
@@ -78,7 +78,7 @@ types:
 
 structs:
   - sockaddr
-  - sockaddr_storage
+  #- sockaddr_storage
   #- msghdr
   #- cmsghdr
   - linger

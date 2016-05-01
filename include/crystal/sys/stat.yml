@@ -53,18 +53,18 @@ structs:
 
 functions:
   - chmod
-  - fchmod
-  - fchmodat
+  #- fchmod
+  #- fchmodat
   - fstat
-  - fstatat
-  - futimens
+  #- fstatat
+  #- futimens
   - lstat
   - mkdir
-  - mkdirat
+  #- mkdirat
   - mkfifo
-  - mkfifoat
+  #- mkfifoat
   - mknod
-  - mknodat
+  #- mknodat
   - stat
   - umask
-  - utimensat
+  #- utimensat

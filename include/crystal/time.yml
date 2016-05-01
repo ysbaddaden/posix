@@ -10,22 +10,22 @@ requires:
 #  sigevent: void  # cygwin
 
 constants:
-  - CLOCKS_PER_SEC
+  #- CLOCKS_PER_SEC
 
   - CLOCK_MONOTONIC
-  - CLOCK_PROCESS_CPUTIME_ID
+  #- CLOCK_PROCESS_CPUTIME_ID
   - CLOCK_REALTIME
-  - CLOCK_THREAD_CPUTIME_ID
+  #- CLOCK_THREAD_CPUTIME_ID
 
-    #- TIMER_ABSTIME
+  #- TIMER_ABSTIME
 
 structs:
   - tm
   - timespec
-  - itimerspec
+  #- itimerspec
 
 functions:
-  - clock
+  #- clock
   #- clock_getcpuclockid
   #- clock_getres
   - clock_gettime
@@ -42,7 +42,7 @@ functions:
   #- strftime
   #- strftime_l
   #- strptime
-  - time
+  #- time
   #- timer_create
   #- timer_delete
   #- timer_getoverrun

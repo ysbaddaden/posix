@@ -11,10 +11,10 @@ constants:
   - W_OK
   - X_OK
 
-  - F_LOCK
-  - F_TEST
-  - F_TLOCK
-  - F_ULOCK
+  #- F_LOCK
+  #- F_TEST
+  #- F_TLOCK
+  #- F_ULOCK
 
   #- _PC_2_SYMLINKS
   #- _PC_ALLOC_SIZE_MIN
@@ -182,10 +182,10 @@ functions:
   #- execv
   #- execve
   - execvp
-  - faccessat
-  - fchdir
-  - fchown
-  - fchownat
+  #- faccessat
+  #- fchdir
+  #- fchown
+  #- fchownat
   #- fdatasync
   #- fexecve
   - "@[ReturnsTwice]\nfork"
@@ -193,58 +193,58 @@ functions:
   #- fsync
   - ftruncate
   - getcwd
-  - getegid
-  - geteuid
-  - getgid
-  - getgroups
+  #- getegid
+  #- geteuid
+  #- getgid
+  #- getgroups
   #- gethostid
   - gethostname
   #- getlogin
-  - getlogin_r
+  #- getlogin_r
   #- getopt
   - getpgid
-  - getpgrp
+  #- getpgrp
   - getpid
   - getppid
-  - getsid
-  - getuid
+  #- getsid
+  #- getuid
   - isatty
   - lchown
   - link
-  - linkat
+  #- linkat
   - lockf
   - lseek
-  - nice
+  #- nice
   #- pathconf
   #- pause
   - pipe
   #- pread
   #- pwrite
   - read
-  - readlink
-  - readlinkat
+  #- readlink
+  #- readlinkat
   - rmdir
-  - setegid
-  - seteuid
-  - setgid
-  - setpgid
-  - setregid
-  - setreuid
-  - setsid
-  - setuid
+  #- setegid
+  #- seteuid
+  #- setgid
+  #- setpgid
+  #- setregid
+  #- setreuid
+  #- setsid
+  #- setuid
   #- sleep
   #- swab
   - symlink
-  - symlinkat
+  #- symlinkat
   #- sync
   - sysconf
   #- tcgetpgrp
   #- tcsetpgrp
   #- truncate
   #- ttyname
-  - ttyname_r
+  #- ttyname_r
   - unlink
-  - unlinkat
+  #- unlinkat
   - write
 
 #variables:

@@ -6,36 +6,36 @@ requires:
   - sys/socket
   - stdint
 
-constants:
-  - AI_PASSIVE
-  - AI_CANONNAME
-  - AI_NUMERICHOST
-  - AI_NUMERICSERV
-  - AI_V4MAPPED
-  - AI_ALL
-  - AI_ADDRCONFIG
-
-  - NI_NOFQDN
-  - NI_NUMERICHOST
-  - NI_NAMEREQD
-  - NI_NUMERICSERV
-  - NI_DGRAM
-  - NI_NUMERICSCOPE
-
-  - EAI_AGAIN
-  - EAI_BADFLAGS
-  - EAI_FAIL
-  - EAI_FAMILY
-  - EAI_MEMORY
-  - EAI_NONAME
-  - EAI_SERVICE
-  - EAI_SOCKTYPE
-  - EAI_SYSTEM
-  - EAI_OVERFLOW
-
-  # not posix
-  - NI_MAXHOST
-  - NI_MAXSERV
+#constants:
+#  - AI_PASSIVE
+#  - AI_CANONNAME
+#  - AI_NUMERICHOST
+#  - AI_NUMERICSERV
+#  - AI_V4MAPPED
+#  - AI_ALL
+#  - AI_ADDRCONFIG
+#
+#  - NI_NOFQDN
+#  - NI_NUMERICHOST
+#  - NI_NAMEREQD
+#  - NI_NUMERICSERV
+#  - NI_DGRAM
+#  - NI_NUMERICSCOPE
+#
+#  - EAI_AGAIN
+#  - EAI_BADFLAGS
+#  - EAI_FAIL
+#  - EAI_FAMILY
+#  - EAI_MEMORY
+#  - EAI_NONAME
+#  - EAI_SERVICE
+#  - EAI_SOCKTYPE
+#  - EAI_SYSTEM
+#  - EAI_OVERFLOW
+#
+#   not posix
+#  - NI_MAXHOST
+#  - NI_MAXSERV
 
 structs:
   #- hostent
@@ -49,11 +49,11 @@ functions:
   #- endnetent
   #- endprotoent
   #- endservent
-  - freeaddrinfo
+  #- freeaddrinfo
   - gai_strerror
-  - getaddrinfo
+  #- getaddrinfo
   #- gethostent
-  - getnameinfo
+  #- getnameinfo
   #- getnetbyaddr
   #- getnetbyname
   #- getnetent

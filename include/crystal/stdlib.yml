@@ -5,7 +5,7 @@ requires:
   - stddef
   - sys/wait
   #- limits
-  - math
+  #- math
 
 maps:
   __compar_fn_t: "Void* -> Int" # gnu
@@ -25,8 +25,8 @@ types:
 #  - WTERMSIG
 
 constants:
-  - EXIT_FAILURE
-  - EXIT_SUCCESS
+  #- EXIT_FAILURE
+  #- EXIT_SUCCESS
   #- RAND_MAX
 
 functions:
@@ -90,7 +90,7 @@ functions:
   #- strtoll
   #- strtoul
   #- strtoull
-  - system
+  #- system
   #- unlockpt
   - unsetenv
   #- wcstombs

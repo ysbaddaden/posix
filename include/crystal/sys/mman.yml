@@ -37,7 +37,7 @@ constants:
   #- POSIX_TYPED_MEM_ALLOCATE_CONTIG
   #- POSIX_TYPED_MEM_MAP_ALLOCATABLE
 
-  # not posix
+  # not posix (darwin requires the POSIX_* constants)
   - MADV_DONTNEED
   - MADV_NORMAL
   - MADV_RANDOM

@@ -17,7 +17,7 @@ functions:
   #- fdopendir
   - opendir
   - readdir
-  - readdir_r
+  #- readdir_r
   - rewinddir
   #- scandir
   #- seekdir

@@ -7,47 +7,47 @@ requires:
   - unistd
 
 constants:
-  - F_DUPFD
-  - F_DUPFD_CLOEXEC
+  #- F_DUPFD
+  #- F_DUPFD_CLOEXEC
   - F_GETFD
   - F_SETFD
   - F_GETFL
   - F_SETFL
-  - F_GETLK
-  - F_SETLK
-  - F_SETLKW
-  - F_GETOWN
-  - F_SETOWN
+  #- F_GETLK
+  #- F_SETLK
+  #- F_SETLKW
+  #- F_GETOWN
+  #- F_SETOWN
 
   - FD_CLOEXEC
-  - F_RDLCK
-  - F_UNLCK
-  - F_WRLCK
+  #- F_RDLCK
+  #- F_UNLCK
+  #- F_WRLCK
 
   - O_CLOEXEC
   - O_CREAT
-  - O_DIRECTORY
-  - O_EXCL
-  - O_NOCTTY
+  #- O_DIRECTORY
+  #- O_EXCL
+  #- O_NOCTTY
   - O_NOFOLLOW
   - O_TRUNC
 
-  - O_TTY_INIT
+  #- O_TTY_INIT
 
   - O_APPEND
-  - O_DSYNC
+  #- O_DSYNC
   - O_NONBLOCK
   - O_SYNC
-  - O_RSYNC
+  #- O_RSYNC
 
-  - O_PATH # musl-libc
-  - O_EXEC
+  #- O_PATH # musl-libc
+  #- O_EXEC
   - O_RDONLY
   - O_RDWR
   - O_SEARCH
   - O_WRONLY
 
-  - O_ACCMODE
+  #- O_ACCMODE
 
   #- AT_FDCWD
   #- AT_EACCESS
@@ -69,6 +69,6 @@ functions:
   #- creat
   - fcntl
   - open
-  - openat
+  #- openat
   #- posix_fadvise
   #- posix_fallocate

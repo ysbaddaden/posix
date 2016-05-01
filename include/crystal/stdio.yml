@@ -22,9 +22,9 @@ constants:
   #- FOPEN_MAX
   #- EOF
 
-types:
-  - FILE = Void
-  - fpos_t
+#types:
+#  - FILE = Void
+#  - fpos_t
 
 functions:
   #- clearerr
@@ -74,8 +74,8 @@ functions:
   #- puts
   #- remove
   - rename
-  - renameat
-  - rewind
+  #- renameat
+  #- rewind
   #- scanf
   #- setbuf
   #- setvbuf

@@ -13,8 +13,8 @@ requires:
 #  - FD_SET
 #  - FD_ZERO
 
-constants:
-  - FD_SETSIZE
+#constants:
+#  - FD_SETSIZE
 
 types:
   - fd_mask # freebsd

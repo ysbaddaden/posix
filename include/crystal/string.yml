@@ -16,7 +16,7 @@ functions:
   #- stpncpy
   #- strcat
   #- strchr
-  #- strcmp
+  - strcmp
   ##- strcoll
   ##- strcoll_l
   #- strcpy
