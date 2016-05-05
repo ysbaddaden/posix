@@ -44,7 +44,7 @@ constants:
   #- O_EXEC
   - O_RDONLY
   - O_RDWR
-  - O_SEARCH
+  #- O_SEARCH
   - O_WRONLY
 
   #- O_ACCMODE
