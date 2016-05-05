@@ -10,7 +10,7 @@ module H2CR
     property debug : Bool
     property source : String
 
-    def initialize(@arch = "unknown", @sys = "unknown", @abi = "unknown")
+    def initialize(@arch = "", @sys = "", @abi = "")
       @debug = false
       @source = File.join(Dir.current, "include", "posix")
     end
@@ -37,11 +37,11 @@ module H2CR
       options.arch = arch
     end
 
-    parser.on("--sys=N", "Specify the OS (darwin, freebsd, linux, win32)") do |sys|
+    parser.on("--sys=NAME", "Specify the OS (linux, macosx, win32)") do |sys|
       options.sys = sys
     end
 
-    parser.on("--abi=NAME", "Specify the ABI (eg: cygwin, darwin, android, gnu, musl)") do |abi|
+    parser.on("--abi=NAME", "Specify the ABI (eg: android, cygwin, darwin, freebsd, gnu, musl, netbsd)") do |abi|
       options.abi = abi
     end
 
