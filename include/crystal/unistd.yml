@@ -237,6 +237,7 @@ functions:
   - symlink
   #- symlinkat
   #- sync
+  - syscall
   - sysconf
   #- tcgetpgrp
   #- tcsetpgrp

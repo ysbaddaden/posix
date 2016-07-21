@@ -1,0 +1,5 @@
+includes:
+  - sys/syscall
+
+constants:
+  - SYS_getrandom
