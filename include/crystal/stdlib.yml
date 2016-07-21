@@ -84,7 +84,7 @@ functions:
   #- srandom
   #- strtod
   - strtof
-  #- strtol
+  - strtol
   # NOTE: crystal doesn't support "long double"
   #- strtold
   #- strtoll
