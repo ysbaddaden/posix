@@ -25,7 +25,7 @@ constants:
   - SOL_SOCKET
 
   #- SO_ACCEPTCONN
-  #- SO_BROADCAST
+  - SO_BROADCAST
   #- SO_DEBUG
   #- SO_DONTROUTE
   #- SO_ERROR
@@ -78,7 +78,7 @@ types:
 
 structs:
   - sockaddr
-  #- sockaddr_storage
+  - sockaddr_storage
   #- msghdr
   #- cmsghdr
   - linger
