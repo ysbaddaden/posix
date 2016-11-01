@@ -4,6 +4,8 @@ includes:
 libraries:
   darwin:
     - iconv
+  openbsd:
+    - iconv
 
 requires:
   - stddef

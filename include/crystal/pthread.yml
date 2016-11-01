@@ -4,6 +4,8 @@ includes:
 libraries:
   freebsd:
     - pthread
+  openbsd:
+    - pthread
 
 requires:
   - sys/types
@@ -92,7 +94,7 @@ functions:
   #- pthread_condattr_setpshared
   - pthread_create
   - pthread_detach
-  #- pthread_equal
+  - pthread_equal
   #- pthread_exit
   #- pthread_getconcurrency
   #- pthread_getcpuclockid
@@ -101,6 +103,7 @@ functions:
   - pthread_join
   #- pthread_key_create
   #- pthread_key_delete
+  - pthread_main_np
   #- pthread_mutex_consistent
   - pthread_mutex_destroy
   #- pthread_mutex_getprioceiling
@@ -136,7 +139,7 @@ functions:
   #- pthread_rwlockattr_getpshared
   #- pthread_rwlockattr_init
   #- pthread_rwlockattr_setpshared
-  #- pthread_self
+  - pthread_self
   #- pthread_setcancelstate
   #- pthread_setcanceltype
   #- pthread_setconcurrency
