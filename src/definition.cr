@@ -34,7 +34,7 @@ module POSIX
     {% for kind in %w(includes requires constants enums types unions structs functions variables) %}
       def {{kind.id}}
         if list = @{{kind.id}}
-          list.each { |item| yield(item as String) }
+          list.each { |item| yield(item.as(String)) }
         end
       end
     {% end %}
@@ -42,7 +42,7 @@ module POSIX
     {% for kind in %w(maps aliases) %}
       def {{kind.id}}
         if list = @{{kind.id}}
-          list.each { |name, value| yield(name as String, value as String) }
+          list.each { |name, value| yield(name.as(String), value.as(String)) }
         end
       end
     {% end %}
@@ -50,7 +50,7 @@ module POSIX
     def libraries
       if libs = @libraries
         if list = libs[@abi]?
-          list as Array
+          list.as(Array)
         end
       end
     end

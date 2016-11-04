@@ -38,7 +38,7 @@ module POSIX
     private getter requirements
     private getter processed
 
-    def initialize(@definition, @bits : Int32 = nil)
+    def initialize(@definition, @bits : Int32, @arch : String)
       @resolver = Resolver.new
       @nodes = CrystalLib::Parser.parse(header)
 
@@ -56,7 +56,7 @@ module POSIX
 
     def transform(io : IO)
       definition.requires do |name|
-        _name = name as String
+        _name = name.as(String)
         if File.dirname(_name) == File.dirname(definition.name)
           io << "require \"./#{File.basename(_name)}\"\n"
         elsif File.dirname(definition.name) != "."
@@ -109,9 +109,9 @@ module POSIX
           name, return_type = name.split(':', 2).map(&.strip)
         end
         if node = find_node(name, :function)
-          processed << name as String
+          processed << name.as(String)
           if node.is_a?(CrystalLib::Function)
-            transform(io, node as CrystalLib::Function, return_type: return_type, flags: flags)
+            transform(io, node.as(CrystalLib::Function), return_type: return_type, flags: flags)
             next
           end
         end
@@ -150,7 +150,7 @@ module POSIX
             node = node.dup(name)
           end
         end
-        processed << name as String
+        processed << name.as(String)
         transform(io, node)
       else
         STDERR.puts "WARN: can't find #{name}"
@@ -368,7 +368,7 @@ module POSIX
       case cname
       when "ssize_t"
         "SSizeT"
-      when "char_s", "uchar"
+      when "uchar", "char_u", "char_s"
         "Char"
       when "schar"
         "SChar"
@@ -381,7 +381,7 @@ module POSIX
       when .starts_with?("_")
         "X_#{cname.downcase.gsub(' ', '_').camelcase}"
       when /\s/
-        cname.split(/\s+/).map { |cn| crname(cn) as String }.join
+        cname.split(/\s+/).map { |cn| crname(cn).as(String) }.join
       when /^[A-Z]/
         if cname.includes?('_')
           cname.downcase.camelcase
@@ -440,7 +440,7 @@ module POSIX
             crname(ctype.unscoped_name)
         end
       when CrystalLib::FunctionType
-        inputs = ctype.inputs.map { |arg| crtype(arg) as String }.join(", ")
+        inputs = ctype.inputs.map { |arg| crtype(arg).as(String) }.join(", ")
         "#{inputs} -> #{crtype(ctype.output)}"
       when CrystalLib::ErrorType
         crname(ctype.name)
@@ -555,6 +555,18 @@ module POSIX
         str << "#define _GNU_SOURCE 1\n"
         str << "#define _GCC_LIMITS_H_ 1\n"
         #str << "#undef __x86_64__\n" unless bits == 64 # LFS (i686)
+
+        # arm-gnueabihf
+        #if @arch.starts_with?("arm") || @arch.starts_with?("aarch64")
+        #  str << "#define __ARM_PCS_VFP 1\n" # hard-float
+        #  str << "typedef unsigned long size_t;\n"
+        #end
+
+        # aarch64-gnu
+        #if @arch.starts_with?("aarch64")
+        #  str << "typedef unsigned long long size_t;\n"
+        #  str << "typedef int wchar_t;\n"
+        #end
 
         # darwin
         str << "#define _DARWIN_NO_64_BIT_INODE\n" # FIXME: LFS

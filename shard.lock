@@ -2,5 +2,5 @@ version: 1.0
 shards:
   crystal_lib:
     github: manastech/crystal_lib
-    commit: 6b2ea33b899e305ad044d6e4de0053bae9e36707
+    commit: d0b3e8edc671f810e2de426e48f96b17500bcd01
 

@@ -79,7 +79,9 @@ module H2CR
     names.sort.each do |name|
       path = File.join("targets", options.target, "c", "#{name}.cr")
       definition = POSIX::Definition.load(name, options.source, options.abi)
-      transformer = POSIX::Transformer.new(definition, bits: options.bits)
+      transformer = POSIX::Transformer.new(definition,
+                                           bits: options.bits,
+                                           arch: options.arch)
 
       if options.debug
         puts "# #{path}"
