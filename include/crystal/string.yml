@@ -7,7 +7,7 @@ requires:
 
 functions:
   #- memccpy
-  #- memchr
+  - memchr
   - memcmp
   #- memcpy
   #- memmove

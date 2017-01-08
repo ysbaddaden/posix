@@ -105,13 +105,16 @@ module POSIX
           flags = name.strip.split('\n')
           name = flags.pop
         end
+        if name.index('=')
+          crystal_name, name = name.split('=', 2).map(&.strip)
+        end
         if name.index(':')
           name, return_type = name.split(':', 2).map(&.strip)
         end
         if node = find_node(name, :function)
           processed << name.as(String)
           if node.is_a?(CrystalLib::Function)
-            transform(io, node.as(CrystalLib::Function), return_type: return_type, flags: flags)
+            transform(io, node.as(CrystalLib::Function), name: crystal_name, return_type: return_type, flags: flags)
             next
           end
         end
@@ -320,13 +323,19 @@ module POSIX
       end
     end
 
-    def transform(io, node : CrystalLib::Function, return_type = nil, flags = nil)
+    def transform(io, node : CrystalLib::Function, name = nil, return_type = nil, flags = nil)
       if flags
         flags.each do |flag|
           io << "  " << flag << "\n"
         end
       end
-      io << "  fun " << node.name
+
+      if name
+        io << "  fun " << name << " = " << node.name
+      else
+        io << "  fun " << node.name
+      end
+
       if node.args.any? || node.variadic?
         io << '('
 
@@ -343,6 +352,7 @@ module POSIX
         io << ", ..." if node.variadic?
         io << ')'
       end
+
       io << " : " << (return_type || crtype(node.return_type)) << "\n"
     end
 
@@ -556,11 +566,11 @@ module POSIX
         str << "#define _GCC_LIMITS_H_ 1\n"
         #str << "#undef __x86_64__\n" unless bits == 64 # LFS (i686)
 
-        # arm-gnueabihf
-        #if @arch.starts_with?("arm") || @arch.starts_with?("aarch64")
-        #  str << "#define __ARM_PCS_VFP 1\n" # hard-float
-        #  str << "typedef unsigned long size_t;\n"
-        #end
+        # arm-gnueabihf | arm-androideabi
+        if @arch.starts_with?("arm")
+          #str << "#define __ARM_PCS_VFP 1\n" # hard-float
+          str << "typedef unsigned long size_t;\n"
+        end
 
         # aarch64-gnu
         #if @arch.starts_with?("aarch64")

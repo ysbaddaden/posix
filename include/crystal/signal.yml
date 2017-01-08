@@ -5,10 +5,11 @@ requires:
   - sys/types
   - time
 
-#types:
-#  - sig_atomic_t
-#  - sigset_t
-#  - mcontext_t
+types:
+  #- sig_atomic_t
+  #- sigset_t
+  #- mcontext_t
+  - sighandler_t # android
 
 #structs:
 #  - sigaction

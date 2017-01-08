@@ -6,6 +6,8 @@ libraries:
     - dl
   gnu:
     - dl
+  android:
+    - dl
 
 constants:
   - RTLD_LAZY
