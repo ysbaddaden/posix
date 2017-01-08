@@ -38,7 +38,7 @@ module POSIX
     private getter requirements
     private getter processed
 
-    def initialize(@definition, @bits : Int32, @arch : String)
+    def initialize(@definition, @bits : Int32, @arch : String, @abi : String)
       @resolver = Resolver.new
       @nodes = CrystalLib::Parser.parse(header)
 
@@ -71,7 +71,11 @@ module POSIX
         io << "@[Link(" << libs.map(&.inspect).join(", ") << ")]\n"
       end
 
-      io << "lib LibC\n"
+      if @abi == "win32"
+        io << "lib LibWindows\n"
+      else
+        io << "lib LibC\n"
+      end
 
       definition.constants { |name| transform(io, name, :constant) }
       io << "\n"
@@ -275,7 +279,15 @@ module POSIX
             end
           end
 
-          _name = field.name.empty? ? "__reserved_#{index}" : field.name
+          case field.name
+          when .empty?
+            _name = "__reserved_#{index}"
+          when /^[A-Z]/
+            _name = field.name.underscore
+          else
+            _name = field.name
+          end
+          #_name = field.name.empty? ? "__reserved_#{index}" : field.name
           _type = crtype(type)
           _type = "Void*" if _type == "Void"
 
@@ -362,6 +374,7 @@ module POSIX
 
     def transform(io, node)
       STDERR.puts "unsupported node (#{node.class.name})"
+      #STDERR.puts caller.join("\n")
     end
 
     def find_enum_value(name)
@@ -392,6 +405,8 @@ module POSIX
         "X_#{cname.downcase.gsub(' ', '_').camelcase}"
       when /\s/
         cname.split(/\s+/).map { |cn| crname(cn).as(String) }.join
+      when /^[A-Z][A-Z_]*\*?$/
+        cname
       when /^[A-Z]/
         if cname.includes?('_')
           cname.downcase.camelcase
@@ -498,7 +513,13 @@ module POSIX
 
       value = value
         .gsub(/\b0(\d+)/, "0o\\1")
+
         .gsub(/\b([+-.xo\da-fA-F]+)F\b/, "\\1_f32")
+        .gsub(/(0[xo][a-fA-F]{1})_f32/, "\\1F")
+        .gsub(/(0[xo][a-fA-F]{3})_f32/, "\\1F")
+        .gsub(/(0[xo][a-fA-F]{7})_f32/, "\\1F")
+        .gsub(/(0[xo][a-fA-F]{15})_f32/, "\\1F")
+
         .gsub(/\b([+-.xo\da-f]+)LL\b/i, "\\1_i64")
         .gsub(/\b([+-.xo\da-f]+)L\b/i, "\\1_i#{bits}")
         .gsub(/\b([+-.xo\da-f]+)LL\b/i, "\\1_u64")
@@ -558,34 +579,48 @@ module POSIX
 
     def header
       String.build do |str|
-        # cygwin
-        str << "#define __CYGWIN__ 1\n"
+        if @abi == "win32"
+          case @arch
+          when "x86_64"
+            str << "#define _M_AMD64\n"
+            str << "#define _AMD64_\n"
+          when "i686"
+            str << "#define _M_IX86\n"
+            str << "#define _X86_\n"
+          end
+          str << "#define _BEGIN_C_DECLS\n"
+          str << "#define _END_C_DECLS\n"
+        else
+          # cygwin
+          str << "#define __CYGWIN__ 1\n"
 
-        # gnu
-        str << "#define _GNU_SOURCE 1\n"
-        str << "#define _GCC_LIMITS_H_ 1\n"
-        #str << "#undef __x86_64__\n" unless bits == 64 # LFS (i686)
+          # gnu
+          str << "#define _GNU_SOURCE 1\n"
+          str << "#define _GCC_LIMITS_H_ 1\n"
+          #str << "#undef __x86_64__\n" unless bits == 64 # LFS (i686)
 
-        # arm-gnueabihf | arm-androideabi
-        if @arch.starts_with?("arm")
-          #str << "#define __ARM_PCS_VFP 1\n" # hard-float
-          str << "typedef unsigned long size_t;\n"
+          # arm-gnueabihf | arm-androideabi
+          if @arch.starts_with?("arm")
+            #str << "#define __ARM_PCS_VFP 1\n" # hard-float
+            str << "typedef unsigned long size_t;\n"
+          end
+
+          # aarch64-gnu
+          #if @arch.starts_with?("aarch64")
+          #  str << "typedef unsigned long long size_t;\n"
+          #  str << "typedef int wchar_t;\n"
+          #end
+
+          # darwin
+          str << "#define _DARWIN_NO_64_BIT_INODE\n" # FIXME: LFS
+          str << "#define lint\n"                    # ntohs, ...
+
+          #str << "#define _POSIX_C_SOURCE 200809L\n"
+          #str << "#define _XOPEN_SOURCE 700\n"
+
+          str << "#include <limits.h>\n"
         end
 
-        # aarch64-gnu
-        #if @arch.starts_with?("aarch64")
-        #  str << "typedef unsigned long long size_t;\n"
-        #  str << "typedef int wchar_t;\n"
-        #end
-
-        # darwin
-        str << "#define _DARWIN_NO_64_BIT_INODE\n" # FIXME: LFS
-        str << "#define lint\n"                    # ntohs, ...
-
-        #str << "#define _POSIX_C_SOURCE 200809L\n"
-        #str << "#define _XOPEN_SOURCE 700\n"
-
-        str << "#include <limits.h>\n"
         definition.includes { |h| str << "#include <#{h}.h>\n" }
       end
     end

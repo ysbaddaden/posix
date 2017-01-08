@@ -1,0 +1,93 @@
+includes:
+  - windef
+
+#requires:
+#  - winnt
+#  - specstring
+
+constants:
+  - HFILE_ERROR
+
+  - DM_UPDATE
+  - DM_COPY
+  - DM_PROMPT
+  - DM_MODIFY
+
+  - DM_IN_BUFFER
+  - DM_IN_PROMPT
+  - DM_OUT_BUFFER
+  - DM_OUT_DEFAULT
+
+  - DC_FIELDS
+  - DC_PAPERS
+  - DC_PAPERSIZE
+  - DC_MINEXTENT
+  - DC_MAXEXTENT
+  - DC_BINS
+  - DC_DUPLEX
+  - DC_SIZE
+  - DC_EXTRA
+  - DC_VERSION
+  - DC_DRIVER
+  - DC_BINNAMES
+  - DC_ENUMRESOLUTIONS
+  - DC_FILEDEPENDENCIES
+  - DC_TRUETYPE
+  - DC_PAPERNAMES
+  - DC_ORIENTATION
+  - DC_COPIES
+
+types:
+  - DWORD
+  - BOOL
+  - BYTE
+  - WORD
+  - FLOAT
+  - PFLOAT
+  - PBOOL
+  - LPBOOL
+  - PBYTE
+  - LPBYTE
+  - PINT
+  - LPINT
+  - PWORD
+  - LPWORD
+  - LPLONG
+  - PDWORD
+  - LPDWORD
+  - LPVOID
+  - LPCVOID
+
+  - INT
+  - UINT
+  - PUINT
+
+  - WPARAM
+  - LPARAM
+  - LRESULT
+
+  - ATOM;
+
+  - SPHANDLE;
+  - LPHANDLE;
+  - HGLOBAL;
+  - HLOCAL;
+  - GLOBALHANDLE;
+  - LOCALHANDLE;
+
+  - FARPROC
+  - NEARPROC
+  - PROC
+
+  - HFILE
+  - HCURSOR
+
+  - COLORREF
+  - LPCOLORREF
+
+structs:
+  - tagRECT
+  - tagPOINT
+  - tagSIZE
+  - tagPOINTS
+

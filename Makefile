@@ -44,6 +44,14 @@ arm64:
 	C_INCLUDE_PATH=c_include/linux/arm64:c_include/linux/arm64/linux:c_include/linux/arm64/aarch64-linux-gnu \
 		$(MAIN) --arch=aarch64 --sys=linux --abi=gnu --source=include/crystal
 
+win32:
+	C_INCLUDE_PATH=c_include/windows/win32api:c_include/windows/mingw \
+		$(MAIN) --arch=i686 --sys=pc --abi=win32 --source=include/windows
+
+win64:
+	C_INCLUDE_PATH=c_include/windows/win32api:c_include/windows/mingw \
+	   $(MAIN) --arch=x86_64 --sys=pc --abi=win32 --source=include/windows
+
 test:
 	for target in targets/*; do\
 	  echo $$target;\

@@ -1,0 +1,15 @@
+includes:
+  - windows
+
+requires:
+  #- excpt
+  #- stdarg
+  - windef
+  #- winbase
+  #- wingdi
+  #- winuser
+  #- winnls
+  #- wincon
+  #- winreg
+  #- winnetwk
+  #- ...
