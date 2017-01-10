@@ -37,11 +37,11 @@ module H2CR
       options.arch = arch
     end
 
-    parser.on("--sys=NAME", "Specify the OS (linux, macosx, win32)") do |sys|
+    parser.on("--sys=NAME", "Specify the OS (linux, macosx, pc, unknown)") do |sys|
       options.sys = sys
     end
 
-    parser.on("--abi=NAME", "Specify the ABI (eg: android, cygwin, darwin, freebsd, gnu, musl, netbsd)") do |abi|
+    parser.on("--abi=NAME", "Specify the ABI (eg: android, cygwin, darwin, freebsd, gnu, musl, netbsd, win32)") do |abi|
       options.abi = abi
     end
 
@@ -49,7 +49,7 @@ module H2CR
       options.bits = n.to_i
     end
 
-    parser.on("--source=PATH", "Force the LONG bit size (32, 64)") do |source|
+    parser.on("--source=PATH", "Path to source definitions") do |source|
       options.source = source
     end
 
@@ -81,7 +81,9 @@ module H2CR
       definition = POSIX::Definition.load(name, options.source, options.abi)
       transformer = POSIX::Transformer.new(definition,
                                            bits: options.bits,
-                                           arch: options.arch)
+                                           arch: options.arch,
+                                           abi: options.abi
+                                          )
 
       if options.debug
         puts "# #{path}"

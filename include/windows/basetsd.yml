@@ -1,0 +1,56 @@
+includes:
+  - basetsd
+
+types:
+  - INT8
+  - PINT8
+  - INT16
+  - PINT16
+  - INT32
+  - PINT32
+  - INT64
+  - PINT64
+
+  - UINT8
+  - PUINT8
+  - UINT16
+  - PUINT16
+  - UINT32
+  - PUINT32
+  - UINT64
+  - PUINT64
+
+  - LONG32
+  - PLONG32
+
+  - ULONG32
+  - PULONG32
+  - DWORD32
+  - PDWORD32
+
+  - INT_PTR
+  - PINT_PTR
+  - UINT_PTR
+  - PUINT_PTR
+
+  - LONG_PTR
+  - PLONG_PTR
+  - ULONG_PTR
+  - PULONG_PTR
+
+  - SHANDLE_PTR
+  - HANDLE_PTR
+  - UHALF_PTR
+  - PUHALF_PTR
+  - HALF_PTR
+  - PHALF_PTR
+
+  - DWORD_PTR
+  - PDWORD_PTR
+
+  - LONG64
+  - PLONG64
+  - ULONG64
+  - PULONG64
+  - DWORD64
+  - PDWORD64
