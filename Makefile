@@ -43,6 +43,10 @@ arm32:
 arm64:
 	C_INCLUDE_PATH=c_include/linux/arm64:c_include/linux/arm64/linux:c_include/linux/arm64/aarch64-linux-gnu \
 		$(MAIN) --arch=aarch64 --sys=linux --abi=gnu --source=include/crystal
+		
+emscripten: bin/main
+	C_INCLUDE_PATH=/usr/local/opt/emscripten/libexec/system/include/libc \
+		$(MAIN) --arch=asmjs --sys=unknown --abi=emscripten --source=include/crystal
 
 test:
 	for target in targets/*; do\
