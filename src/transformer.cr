@@ -1,5 +1,5 @@
 require "crystal_lib"
-require "crystal_lib/clang"
+require "clang"
 require "compiler/crystal/formatter"
 require "./resolver"
 
@@ -50,8 +50,11 @@ module POSIX
     end
 
     def transform
-      code = String.build { |str| transform(str) }
+      code = String.build &->transform(String::Builder)
       Crystal::Formatter.format(code)
+    rescue e : Crystal::SyntaxException
+      puts code, "problem at line #{e.line_number}, col #{e.column_number} in #{e.filename}"
+      raise e
     end
 
     def transform(io : IO)
@@ -343,8 +346,9 @@ module POSIX
         node.args.shift if node.name == "signal" && node.args.size == 3
 
         node.args.each_with_index do |arg, index|
-          name = arg.name == "" ? "x#{index}" : arg.name
-          name = name.sub(/^_+/, "")
+          name = arg.name
+          name = name.sub(/^_+/, "").downcase
+          name = "x#{index}" if name.empty?
           io << ", " unless index == 0
           io << name << " : " << crtype(arg.type)
         end
