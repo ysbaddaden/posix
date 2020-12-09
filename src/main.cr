@@ -49,7 +49,7 @@ module H2CR
       options.bits = n.to_i
     end
 
-    parser.on("--source=PATH", "Force the LONG bit size (32, 64)") do |source|
+    parser.on("--source=PATH", "Source directory in which to look for configuration files") do |source|
       options.source = source
     end
 

@@ -57,7 +57,7 @@ module POSIX
       return name unless name.starts_with?('_')
 
       # looking up for: typedef ssize_t __ssize_t
-      if value = types.key?(name)
+      if value = types.key_for?(name)
         if value != name
           return value unless value.starts_with?('_')
         end

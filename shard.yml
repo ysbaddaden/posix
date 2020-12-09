@@ -1,5 +1,6 @@
 name: posix
 version: 0.1.0
+crystal: 0.35.0
 
 authors:
   - Julien Portalier <julien@portalier.com>
@@ -9,6 +10,6 @@ description: |
 
 dependencies:
   crystal_lib:
-    github: manastech/crystal_lib
+    github: crystal-lang/crystal_lib
 
 license: Apache-2.0
